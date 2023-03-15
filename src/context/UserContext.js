@@ -17,6 +17,8 @@ export const UserProvider = ({ children }) => {
   const [signedInUser, setSignedInUser] = useState();
   const [loading, setLoading] = useState(true);
   const auth = getAuth(app);
+
+  //On Auth State Changed Of Firebase
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -30,6 +32,8 @@ export const UserProvider = ({ children }) => {
     });
   }, [signedInUser]);
 
+
+//Sign Out Function
   async function signOutOfGoogle() {
     signOut(auth)
       .then(() => {
@@ -39,6 +43,8 @@ export const UserProvider = ({ children }) => {
       .catch((error) => {});
   }
 
+
+//Fetch User Profile from DB
   async function fetchProfile() {
     try {
       if (signedInUser) {
@@ -58,6 +64,8 @@ export const UserProvider = ({ children }) => {
       setLoading(false);
     }
   }
+
+  //Login Function to be Executed After Google SIgn In
   async function handleLogin() {
     if (signedInUser) {
       setLoading(true);
@@ -75,6 +83,7 @@ export const UserProvider = ({ children }) => {
             }
           });
       } catch (error) {
+        //Have to fix this code
         await axios
           .post(
             "/api/auth/signup",
@@ -97,6 +106,8 @@ export const UserProvider = ({ children }) => {
       }
     }
   }
+
+  //Google Sign In Of Firebase
   async function signInWithGoogle() {
     signInWithPopup(auth, provider).catch((error) => {
       return error;
