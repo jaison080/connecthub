@@ -8,7 +8,7 @@ async function handler(req, res) {
     try {
       await connectDB();
       const user = await User.findOne({ uid: uid })
-        .populate("posts");
+        .populate("posts").populate("friends");
       res.status(200).json({ message: "User found", data: user });
     } catch (error) {
       res.status(500).json({ error: error.message });
