@@ -6,6 +6,7 @@ async function handler(req, res) {
     try {
       await connectDB();
       const { uid } = req.user;
+      const user = await User.findOne({ uid: uid });
       const userFriends = await User.findOne({ uid: uid }).friends;
       //   const mutualFriends = [];
       //   for (let i = 0; i < userFriends.length; i++) {
@@ -21,8 +22,8 @@ async function handler(req, res) {
 
       const mutualFriends = await User.find({
         _id: { $in: userFriends },
-        friends: uid,
-      }).populate("friend");
+        friends: user._id,
+      }).populate("friends");
 
       res
         .status(200)
