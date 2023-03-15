@@ -1,4 +1,4 @@
-import { connectDB } from "../../../../utils/connectDB";
+import connectDB from "../../../../utils/connectDB";
 import { withAuth } from "../../../../utils/auth";
 import User from "../../../../models/User";
 
@@ -8,9 +8,15 @@ async function handler(req, res) {
       await connectDB();
 
       const { uid } = req.user;
-      const { name, image } = req.body;
-
+      let { name, image } = req.body;
       const user = await User.findOne({ uid: uid });
+
+      if (!name) {
+        name = user.name;
+      }
+      if (!image) {
+        image = user.image;
+      }
 
       if (!user) {
         return res.status(404).json({ message: "User not found" });

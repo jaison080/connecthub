@@ -1,5 +1,6 @@
 import User from "../../../../models/User";
 import connectDB from "../../../../utils/connectDB";
+import { withAuth } from "../../../../utils/auth";
 async function handler(req, res) {
   if (req.method === "GET") {
     const { uid } = req.user;
