@@ -1,5 +1,6 @@
 import connectDB from "../../../utils/connectDB";
 import User from "../../../models/User";
+import {withAuth} from "../../../utils/auth";
 
 async function handler(req, res) {
   if (req.method == "POST") {
