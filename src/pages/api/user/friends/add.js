@@ -9,7 +9,7 @@ async function handler(req, res) {
       const { uid } = req.user;
       const { friendId } = req.body;
       const user = await User.findOne({ uid: uid });
-      const friend = await User.findOne({ uid: friendId });
+      const friend = await User.findOne({ _id: friendId });
 
       if (!friend) {
         return res.status(404).json({ message: "Friend not found" });
