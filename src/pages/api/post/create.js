@@ -15,11 +15,16 @@ async function handler(req, res) {
         image: image,
         creator: user._id,
       });
+
       const data = await post.save();
+      user.posts.push(data._id);
+      await user.save();
       res.status(200).json({ message: "Post added", data });
     } catch (err) {
       res.status(500).json({ error: err.message });
     }
+  } else {
+    res.status(500).json({ message: "Method not allowed" });
   }
 }
 
