@@ -1,3 +1,4 @@
+import User from "../../../../models/User";
 import { withAuth } from "../../../../utils/auth";
 import connectDB from "../../../../utils/connectDB";
 async function handler(req, res) {
