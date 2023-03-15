@@ -1,4 +1,4 @@
-import UserCard from "@/components/UserCard/UserCard";
+import { PostCard, UserCard } from "@/components";
 import { UserContext } from "@/context/UserContext";
 import { useContext } from "react";
 
@@ -16,6 +16,7 @@ export default function Home() {
         <button onClick={signInWithGoogle}>Sign in with Google</button>
       )}
       {loading ? <h3>Loading....</h3> : ""}
+      <PostCard />
       <UserCard />
     </>
   );
