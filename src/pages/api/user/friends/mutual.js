@@ -29,7 +29,7 @@ async function handler(req, res) {
       const mutualFriends = await User.find({
         _id: { $ne: friendId, $in: (await User.findById(user._id)).friends },
         friends: { $elemMatch: { $eq: friendId } },
-      }).populate("friends");
+      });
 
       res
         .status(200)
