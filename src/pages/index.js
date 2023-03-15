@@ -1,8 +1,5 @@
 import { UserContext } from "@/context/UserContext";
-import { Inter } from "next/font/google";
 import { useContext } from "react";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const { signInWithGoogle, profile, loading, signOutOfGoogle } =
