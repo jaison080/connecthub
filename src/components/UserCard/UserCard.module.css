@@ -5,7 +5,7 @@
   flex-direction: column;
   justify-content: flex-start;
   background: #fff;
- gap: 1.25rem;
+  gap: 1.25rem;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   padding: 2rem;
 }
@@ -34,7 +34,7 @@
   font-size: 1.125rem;
   font-weight: 600;
   line-height: 1.5rem;
-  padding: 0.75rem 1.2rem;
+  padding: 1.25rem 1.75rem;
   text-align: center;
   text-decoration: none #6b7280 solid;
   text-decoration-thickness: auto;
@@ -84,7 +84,7 @@
 }
 @media (min-width: 768px) {
   .follow_btn {
-    padding: 0.75rem;
+    padding: 0.8rem;
   }
 }
 
@@ -94,5 +94,17 @@
   }
   .footer {
     justify-content: center;
+  }
+}
+
+@media (max-width: 400px) {
+  .card {
+    width: 100%;
+  }
+  .profile_image_wrapper img {
+    width: 60px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 50%;
   }
 }

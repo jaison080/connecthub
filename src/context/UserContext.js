@@ -17,6 +17,7 @@ export const UserProvider = ({ children }) => {
   const [signedInUser, setSignedInUser] = useState();
   const [loading, setLoading] = useState(true);
   const [posts, setPosts] = useState([]);
+  const [userPosts, setUserPosts] = useState([]);
   const [users, setUsers] = useState([]);
   const [mutualFriends, setMutualFriends] = useState([]);
   const auth = getAuth(app);
@@ -163,6 +164,18 @@ export const UserProvider = ({ children }) => {
       }
     }
   }
+  async function getPostsbyUserId(id) {
+    setLoading(true);
+    let temp = [];
+    posts.find((post) => {
+      if (post.creator._id === id) {
+        temp.push(post);
+      }
+    });
+    setUserPosts(temp);
+    setLoading(false);
+    return;
+  }
 
   return (
     <UserContext.Provider
@@ -171,11 +184,13 @@ export const UserProvider = ({ children }) => {
         loading,
         posts,
         users,
+        userPosts,
         signedInUser,
         mutualFriends,
         signInWithGoogle,
         signOutOfGoogle,
         getMutualFriends,
+        getPostsbyUserId,
       }}
     >
       {children}

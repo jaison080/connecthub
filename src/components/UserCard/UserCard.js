@@ -16,7 +16,7 @@ function UserCard({ user }) {
         <div className={styles.profile_image_wrapper}>
           <img src={user.image} alt="" />
         </div>
-        <div className={styles.follow_btn}>Follow</div>
+        <div className={styles.follow_btn}>Friend</div>
       </div>
       <div className={styles.user_details}>
         <div className={styles.user_name}>{user.name}</div>
