@@ -129,7 +129,6 @@ function Navbar() {
               <MenuItem
                 onClick={() => {
                   signOutOfGoogle();
-                  router.push("/users");
                 }}
                 style={{
                   color: "#a6432d",

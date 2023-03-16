@@ -6,7 +6,7 @@ import {
 } from "@/components";
 import { UserContext } from "@/context/UserContext";
 import { useRouter } from "next/router";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import styles from "../styles/Profile.module.css";
 import { IoCreate } from "react-icons/io5";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
@@ -35,9 +35,15 @@ function Profile() {
     setOpen1(false);
   };
 
+  useEffect(() => {
+    if (!loading) {
+      if (!profile) router.push("/");
+    }
+  }, [profile]);
+
   return (
     <>
-    <CustomTitle title={"Profile"}/>
+      <CustomTitle title={"Profile"} />
       <AddPostModal open={open} handleClose={handleClose} />
       {profile ? (
         <EditProfileModal

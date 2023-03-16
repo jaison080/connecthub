@@ -1,6 +1,7 @@
 import { UserContext } from "@/context/UserContext";
 import { useRouter } from "next/router";
 import React, { useContext } from "react";
+import { toast } from "react-hot-toast";
 import styles from "./UserCard.module.css";
 
 function UserCard({ user }) {
@@ -30,6 +31,10 @@ function UserCard({ user }) {
           <div
             className={styles.follow_btn}
             onClick={() => {
+              if (!profile) {
+                toast.error("Please login to add friends");
+                return;
+              }
               isFriend(user._id) ? removeFriend(user._id) : addFriend(user._id);
             }}
           >
@@ -56,9 +61,7 @@ function UserCard({ user }) {
             : router.push(`/users/${user._id}`);
         }}
       >
-        {user.bio
-          ? user.bio
-          : "Product Designer @company.Working on another @company in my free time."}
+        {user.bio}
       </div>
       <div
         className={styles.footer}

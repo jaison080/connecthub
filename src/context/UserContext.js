@@ -8,6 +8,7 @@ import {
 } from "firebase/auth";
 import app from "../utils/firebaseFront";
 import axios from "axios";
+import { toast } from "react-hot-toast";
 
 export const UserContext = React.createContext();
 
@@ -81,6 +82,8 @@ export const UserProvider = ({ children }) => {
           })
           .then(async (res) => {
             if (res.status === 200) {
+              toast.success("Logged In Successfully")
+
               await fetchProfile();
             }
           });
@@ -100,6 +103,7 @@ export const UserProvider = ({ children }) => {
           )
           .then(async (res) => {
             if (res.status === 200) {
+              toast.success("User Registered Successfully")
               await fetchProfile();
             }
           });
@@ -215,6 +219,7 @@ export const UserProvider = ({ children }) => {
         }
       );
       if (response.status === 200) {
+        toast.success("Friend Added");
         getAllUsers();
         fetchProfile();
 
@@ -241,6 +246,7 @@ export const UserProvider = ({ children }) => {
       );
 
       if (response.status === 200) {
+        toast.success("Friend Removed")
         getAllUsers();
         fetchProfile();
 
@@ -269,6 +275,7 @@ export const UserProvider = ({ children }) => {
         }
       );
       if (response.status === 200) {
+        toast.success("Post Created Successfully")
         getAllPosts();
         fetchProfile();
         setLoading(false);
@@ -298,6 +305,7 @@ export const UserProvider = ({ children }) => {
         }
       );
       if (response.status === 200) {
+        toast.success("Post Edited Successfully")
         getAllPosts();
         fetchProfile();
         setLoading(false);
@@ -327,6 +335,7 @@ export const UserProvider = ({ children }) => {
         }
       );
       if (response.status === 200) {
+        toast.success("Profile Edited Successfully")
         fetchProfile();
         setLoading(false);
         return response.data;
@@ -349,6 +358,7 @@ export const UserProvider = ({ children }) => {
         },
       });
       if (response.status === 200) {
+        toast.success("Post Deleted Successfully")
         getAllPosts();
         fetchProfile();
         setLoading(false);

@@ -5,6 +5,7 @@ import "@/styles/globals.css";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
+import { Toaster } from "react-hot-toast";
 
 export default function App({ Component, pageProps }) {
   useEffect(() => {
@@ -14,6 +15,7 @@ export default function App({ Component, pageProps }) {
   }, []);
   return (
     <UserProvider>
+      <Toaster/>
       <div
         style={{
           display: "flex",
