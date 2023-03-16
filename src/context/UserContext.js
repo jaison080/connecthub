@@ -307,6 +307,34 @@ export const UserProvider = ({ children }) => {
     return false;
   }
 
+    //Update Profile
+    async function updateProfile(id, name, bio, image) {
+      if (signedInUser) {
+        setLoading(true);
+        const accessToken = await signedInUser.getIdToken();
+        const response = await axios.put(
+          "/api/user/profile/edit",
+          {
+            id,
+            name,
+            bio,
+            image,
+          },
+          {
+            headers: {
+              "x-auth-token": accessToken,
+            },
+          }
+        );
+        if (response.status === 200) {
+          fetchProfile();
+          setLoading(false);
+          return response.data;
+        }
+      }
+      return false;
+    }
+
   return (
     <UserContext.Provider
       value={{
@@ -325,7 +353,8 @@ export const UserProvider = ({ children }) => {
         addFriend,
         removeFriend,
         createPost,
-        updatePost
+        updatePost,
+        updateProfile,
       }}
     >
       {children}

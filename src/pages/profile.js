@@ -8,11 +8,13 @@ import { IoCreate } from "react-icons/io5";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import { FaUserEdit } from "react-icons/fa";
 import AddPostModal from "@/components/AddPostModal/AddPostModal";
+import EditProfileModal from "@/components/EditProfileModal/EditProfileModal";
 
 function Profile() {
   const router = useRouter();
   const { profile, loading } = useContext(UserContext);
   const [open, setOpen] = React.useState(false);
+  const [open1, setOpen1] = React.useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -22,12 +24,28 @@ function Profile() {
     setOpen(false);
   };
 
+  const handleClickOpen1 = () => {
+    setOpen1(true);
+  };
+
+  const handleClose1 = () => {
+    setOpen1(false);
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
   return (
     <>
       <AddPostModal open={open} handleClose={handleClose} />
+      {profile ? (
+        <EditProfileModal
+          open={open1}
+          handleClose={handleClose1}
+          profile={profile}
+        />
+      ) : null}
+
       <div className={styles.container}>
         <div className={styles.user_card}>
           <BsFillArrowLeftCircleFill
@@ -68,6 +86,9 @@ function Profile() {
                   display: "flex",
                   alignItems: "center",
                   gap: "5px",
+                }}
+                onClick={() => {
+                  handleClickOpen1();
                 }}
               >
                 <FaUserEdit color="#fff" size={20} />
