@@ -1,7 +1,7 @@
 import { UserCard } from "@/components";
 import { UserContext } from "@/context/UserContext";
 import React, { useContext } from "react";
-import styles from "../styles/Users.module.css";
+import styles from "../../styles/Users.module.css";
 
 function Users() {
   const { users, loading } = useContext(UserContext);

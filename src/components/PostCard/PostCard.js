@@ -16,6 +16,7 @@ function PostCard({ post }) {
       <div className={styles.content_wrapper}>
         <div className={styles.user_title}>{post.title}</div>
         <div className={styles.user_content}>{post.content}</div>
+        <img src={post.image} alt="" />
       </div>
       <div className={styles.user_footer}>
         <div className={styles.user_time}>40 Likes</div>

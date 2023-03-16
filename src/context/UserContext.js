@@ -18,6 +18,7 @@ export const UserProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState([]);
+  const [mutualFriends, setMutualFriends] = useState([]);
   const auth = getAuth(app);
 
   //On Auth State Changed Of Firebase
@@ -124,7 +125,6 @@ export const UserProvider = ({ children }) => {
     setLoading(true);
     const response = await axios.get("/api/post");
     if (response.status === 200) {
-      console.log(response.data);
       setPosts(response.data);
       setLoading(false);
     }
@@ -135,9 +135,32 @@ export const UserProvider = ({ children }) => {
     setLoading(true);
     const response = await axios.get("/api/user");
     if (response.status === 200) {
-      console.log(response.data);
       setUsers(response.data);
       setLoading(false);
+      return response.data;
+    }
+  }
+
+  async function getMutualFriends(id) {
+    if (signedInUser) {
+      setLoading(true);
+      const accessToken = await signedInUser.getIdToken();
+      const response = await axios.post(
+        "/api/user/friends/mutual",
+        {
+          friendId: id,
+        },
+        {
+          headers: {
+            "x-auth-token": accessToken,
+          },
+        }
+      );
+      if (response.status === 200) {
+        setMutualFriends(response.data.data);
+        setLoading(false);
+        return response.data.data;
+      }
     }
   }
 
@@ -148,8 +171,11 @@ export const UserProvider = ({ children }) => {
         loading,
         posts,
         users,
+        signedInUser,
+        mutualFriends,
         signInWithGoogle,
         signOutOfGoogle,
+        getMutualFriends,
       }}
     >
       {children}

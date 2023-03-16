@@ -1,9 +1,17 @@
+import { useRouter } from "next/router";
 import React from "react";
 import styles from "./UserCard.module.css";
 
 function UserCard({ user }) {
+  const router = useRouter();
   return (
-    <div className={styles.card}>
+    <div
+      className={styles.card}
+      style={{ cursor: "pointer" }}
+      onClick={() => {
+        router.push(`/users/${user._id}`);
+      }}
+    >
       <div className={styles.first_row}>
         <div className={styles.profile_image_wrapper}>
           <img src={user.image} alt="" />
