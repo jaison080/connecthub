@@ -1,4 +1,5 @@
 import { PostCard, UserCard } from "@/components";
+import MutualFriendCard from "@/components/MutualFriendCard/MutualFriendCard";
 import { UserContext } from "@/context/UserContext";
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
@@ -36,29 +37,40 @@ function User() {
   }
 
   return (
-    <div>
-      {user ? (
-        <div>
-          <div>{user.name}</div>
-          <div>{user.email}</div>
-          <div>{user?.bio}</div>
+    <div className={styles.container}>
+      <div className={styles.user_card}>
+        <div className={styles.user_header}>
+          <div className={styles.user_image}>
+            <img src={user.image} alt="" />
+          </div>
+          <div>
+            <div className={styles.user_name}>{user.name}</div>
+            <div className={styles.user_email}>{user.email}</div>
+            <div className={styles.user_bio}>{user.bio}</div>
+          </div>
+          <div className={styles.follow_button}>Follow</div>
         </div>
-      ) : (
-        <div>User Not Found</div>
-      )}
-      <div>{mutualFriends.length !== 0 ? <h3>Mutual Friends</h3>:<h3>No Mutual Friends</h3>}</div>
-      <div>
-        {mutualFriends.length !== 0 &&
-          mutualFriends?.map((mutual) => (
-            <UserCard key={mutual._id} user={mutual} />
-          ))}
+        <div className={styles.user_details_item_count}>
+          <b>{user.followers.length}</b> Followers
+        </div>
       </div>
-      <div className={styles.follow_btn}>Friend</div>
-
-      <div>{userPosts.length !== 0 ? <h3>User Posts</h3>:<h3>No User Posts</h3>}</div>
-      <div>
-        {userPosts.length !== 0 &&
-          userPosts?.map((post) => <PostCard key={post._id} post={post} />)}
+      <div className={styles.user_info}>
+        <div className={styles.mutual_friends}>
+          <h2>Mutual Friends</h2>
+          <div className={styles.mutual_friends_list}>
+            {mutualFriends.map((user) => (
+              <MutualFriendCard key={user._id} user={user} />
+            ))}
+          </div>
+        </div>
+        <div className={styles.user_posts}>
+          <h2>Posts</h2>
+          <div className={styles.user_posts_list}>
+            {userPosts.map((post) => (
+              <PostCard key={post._id} post={post} />
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );

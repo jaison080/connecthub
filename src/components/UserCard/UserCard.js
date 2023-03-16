@@ -1,22 +1,21 @@
 import { UserContext } from "@/context/UserContext";
 import { useRouter } from "next/router";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import styles from "./UserCard.module.css";
 
 function UserCard({ user }) {
   const { isFriend, addFriend, removeFriend, profile } =
     useContext(UserContext);
 
+  const router = useRouter();
+
   return (
-    <div
-      className={styles.card}
-      style={{ cursor: "pointer" }}
-      // onClick={() => {
-      //   router.push(`/users/${user._id}`);
-      // }}
-    >
+    <div className={styles.card} style={{ cursor: "pointer" }}>
       <div className={styles.first_row}>
-        <div className={styles.profile_image_wrapper}>
+        <div
+          className={styles.profile_image_wrapper}
+          onClick={() => router.push(`/users/${user._id}`)}
+        >
           <img src={user.image} alt="" />
         </div>
         {profile && user._id === profile._id ? null : (
@@ -30,16 +29,25 @@ function UserCard({ user }) {
           </div>
         )}
       </div>
-      <div className={styles.user_details}>
+      <div
+        className={styles.user_details}
+        onClick={() => router.push(`/users/${user._id}`)}
+      >
         <div className={styles.user_name}>{user.name}</div>
         <div className={styles.user_username}>@{user.email.split("@")[0]}</div>
       </div>
-      <div className={styles.bio}>
+      <div
+        className={styles.bio}
+        onClick={() => router.push(`/users/${user._id}`)}
+      >
         {user.bio
           ? user.bio
           : "Product Designer @company.Working on another @company in my free time."}
       </div>
-      <div className={styles.footer}>
+      <div
+        className={styles.footer}
+        onClick={() => router.push(`/users/${user._id}`)}
+      >
         <div className={styles.footer_text}>
           <b>{user.friends.length}</b> Friends
         </div>

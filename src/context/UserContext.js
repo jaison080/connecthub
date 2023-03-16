@@ -199,6 +199,10 @@ export const UserProvider = ({ children }) => {
     return false;
   }
 
+  useEffect(() => {
+    console.log("Profile", profile);
+  }, [profile]);
+
   //Add Friend Function
   async function addFriend(id) {
     if (signedInUser) {
@@ -216,8 +220,13 @@ export const UserProvider = ({ children }) => {
         }
       );
       if (response.status === 200) {
+        setProfile((prev) => {
+          prev.friends.push(response.data.data);
+          return { ...prev, friends: prev.friends };
+        });
+
         setLoading(false);
-        fetchProfile();
+
         return response.data;
       }
     }
@@ -243,7 +252,10 @@ export const UserProvider = ({ children }) => {
 
       if (response.status === 200) {
         setLoading(false);
-        fetchProfile();
+        setProfile((prev) => {
+          const temp = prev.friends.filter((friend) => friend._id !== id);
+          return { ...prev, friends: temp };
+        });
         return response.data;
       }
     }
