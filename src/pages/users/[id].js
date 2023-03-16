@@ -4,11 +4,16 @@ import { UserContext } from "@/context/UserContext";
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
 import styles from "../../styles/User.module.css";
+import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 
 function User() {
   const router = useRouter();
   const {
     users,
+    profile,
+    isFriend,
+    addFriend,
+    removeFriend,
     loading,
     getMutualFriends,
     mutualFriends,
@@ -21,6 +26,7 @@ function User() {
   const { id } = router.query;
   async function fetchUser() {
     const user = users.find((user) => user._id === id);
+    console.log(user);
     setUser(user);
   }
   useEffect(() => {
@@ -39,24 +45,60 @@ function User() {
   return (
     <div className={styles.container}>
       <div className={styles.user_card}>
+        <BsFillArrowLeftCircleFill
+          color="#a6432d"
+          style={{
+            cursor: "pointer",
+          }}
+          size={40}
+          onClick={() => router.back()}
+        />
         <div className={styles.user_header}>
           <div className={styles.user_image}>
-            <img src={user.image} alt="" />
+            <img src={user?.image} alt="" />
+            <div className={styles.user_details}>
+              <div className={styles.user_name}>{user?.name}</div>
+              <div className={styles.user_email}>
+                @{user?.email.split("@")[0]}
+              </div>
+              <div className={styles.user_bio}>{user?.bio}</div>
+            </div>
           </div>
-          <div>
-            <div className={styles.user_name}>{user.name}</div>
-            <div className={styles.user_email}>{user.email}</div>
-            <div className={styles.user_bio}>{user.bio}</div>
-          </div>
-          <div className={styles.follow_button}>Follow</div>
+          {profile && user?._id === profile._id ? null : (
+            <div
+              className={styles.follow_btn}
+              onClick={() => {
+                isFriend(user?._id)
+                  ? removeFriend(user?._id)
+                  : addFriend(user?._id);
+              }}
+            >
+              {isFriend(user?._id) ? "Remove Friend" : "Add Friend"}
+            </div>
+          )}
         </div>
-        <div className={styles.user_details_item_count}>
-          <b>{user.followers.length}</b> Followers
+        <div
+          className={styles.user_email}
+          style={{
+            textAlign: "center",
+            paddingTop: "10px",
+            fontSize: "1.2rem",
+          }}
+        >
+          <b>{user?.friends?.length}</b> Friends
         </div>
       </div>
       <div className={styles.user_info}>
-        <div className={styles.mutual_friends}>
-          <h2>Mutual Friends</h2>
+        {mutualFriends.length === 0 && userPosts.length === 0 ? (
+          <div className={styles.no_info_text}>No mutual friends or posts</div>
+        ) : null}
+        <div
+          className={styles.mutual_friends}
+          style={{
+            display: mutualFriends.length === 0 ? "none" : "block",
+          }}
+        >
+          <div className={styles.mutual_friends_header}>Mutual Friends</div>
           <div className={styles.mutual_friends_list}>
             {mutualFriends.map((user) => (
               <MutualFriendCard key={user._id} user={user} />
@@ -64,7 +106,14 @@ function User() {
           </div>
         </div>
         <div className={styles.user_posts}>
-          <h2>Posts</h2>
+          <div
+            className={styles.user_posts_header}
+            style={{
+              display: userPosts.length === 0 ? "none" : "block",
+            }}
+          >
+            Posts
+          </div>
           <div className={styles.user_posts_list}>
             {userPosts.map((post) => (
               <PostCard key={post._id} post={post} />
