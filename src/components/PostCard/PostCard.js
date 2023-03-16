@@ -5,7 +5,7 @@ import EditPostModal from "../EditPostModal/EditPostModal";
 import styles from "./PostCard.module.css";
 
 function PostCard({ post, name, image }) {
-  const { profile } = useContext(UserContext);
+  const { profile, deletePost } = useContext(UserContext);
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -18,11 +18,7 @@ function PostCard({ post, name, image }) {
 
   return (
     <>
-      <EditPostModal
-        open={open}
-        handleClose={handleClose}
-        post={post}
-      />
+      <EditPostModal open={open} handleClose={handleClose} post={post} />
       <div className={styles.card}>
         <div className={styles.card_row}>
           <div className={styles.image_wrapper}>
@@ -35,9 +31,26 @@ function PostCard({ post, name, image }) {
             <div className={styles.user_time}>4 Days Ago</div>
           </div>
           {post.creator === profile?._id ? (
-            <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-              Edit
-            </Button>
+            <div style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "10px"
+            }}>
+              <Button
+                variant="outlined"
+                color="primary"
+                onClick={handleClickOpen}
+              >
+                Edit
+              </Button>
+              <Button
+                variant="outlined"
+                color="error"
+                onClick={()=>deletePost(post._id)}
+              >
+                Delete
+              </Button>
+            </div>
           ) : null}
         </div>
         <div className={styles.content_wrapper}>
