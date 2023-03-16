@@ -87,11 +87,24 @@ function User() {
           <b>{user?.friends?.length}</b> Friends
         </div>
       </div>
-      <div className={styles.user_info} style={{
-        display: mutualFriends.length === 0 && userPosts.length === 0 ? "block" : "flex",
-      }}>
+      <div
+        className={styles.user_info}
+        style={{
+          display:
+            mutualFriends.length === 0 && userPosts.length === 0
+              ? "block"
+              : "flex",
+        }}
+      >
         {mutualFriends.length === 0 && userPosts.length === 0 ? (
-          <div className={styles.no_info_text}>No mutual friends or posts</div>
+          <div
+            className={styles.no_info_text}
+            style={{
+              paddingTop: "20px",
+            }}
+          >
+            No mutual friends or posts
+          </div>
         ) : null}
         <div
           className={styles.mutual_friends}
@@ -116,9 +129,11 @@ function User() {
             Posts
           </div>
           <div className={styles.user_posts_list}>
-            {userPosts.map((post) => (
-              <PostCard key={post._id} post={post} />
-            ))}
+            {userPosts
+              .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+              .map((post) => (
+                <PostCard key={post._id} post={post} />
+              ))}
           </div>
         </div>
       </div>

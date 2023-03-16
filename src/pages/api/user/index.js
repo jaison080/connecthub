@@ -5,7 +5,7 @@ async function handler(req, res) {
   if (req.method === "GET") {
     try {
       await connectDB();
-      const posts = await User.find({});
+      const posts = await User.find({}).sort({ createdAt: -1 });
       if (!posts) {
         return res.status(404).json({ message: "Users not found" });
       }

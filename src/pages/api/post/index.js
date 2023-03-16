@@ -6,7 +6,9 @@ async function handler(req, res) {
   if (req.method === "GET") {
     try {
       await connectDB();
-      const posts = await Post.find({}).populate("creator");
+      const posts = await Post.find({})
+        .populate("creator")
+        .sort({ createdAt: -1 });
       if (!posts) {
         return res.status(404).json({ message: "Posts not found" });
       }

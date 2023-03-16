@@ -108,8 +108,15 @@ function Profile() {
           </div>
         </div>
         <div className={styles.user_info}>
-          {profile?.posts?.reverse().length === 0 && profile?.friends?.length === 0 ? (
-            <div className={styles.no_info_text}>
+          {profile?.posts?.sort(
+            (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+          ).length === 0 && profile?.friends?.length === 0 ? (
+            <div
+              className={styles.no_info_text}
+              style={{
+                paddingTop: "20px",
+              }}
+            >
               No Posts or Friends to show
             </div>
           ) : null}
