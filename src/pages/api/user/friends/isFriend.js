@@ -1,5 +1,5 @@
 import { withAuth } from "@/utils/auth";
-import User from "../../../../models/user";
+import User from "../../../../models/User";
 
 async function handler(req, res) {
   if (req.method === "POST") {
