@@ -250,6 +250,63 @@ export const UserProvider = ({ children }) => {
     return false;
   }
 
+  //Create Post
+  async function createPost(title, content, image) {
+    if (signedInUser) {
+      setLoading(true);
+      const accessToken = await signedInUser.getIdToken();
+      const response = await axios.post(
+        "/api/post/create",
+        {
+          title,
+          content,
+          image,
+        },
+        {
+          headers: {
+            "x-auth-token": accessToken,
+          },
+        }
+      );
+      if (response.status === 200) {
+        getAllPosts();
+        fetchProfile();
+        setLoading(false);
+        return response.data;
+      }
+    }
+    return false;
+  }
+
+  //Update Post
+  async function updatePost(id, title, content, image) {
+    if (signedInUser) {
+      setLoading(true);
+      const accessToken = await signedInUser.getIdToken();
+      const response = await axios.put(
+        "/api/post/edit",
+        {
+          id,
+          title,
+          content,
+          image,
+        },
+        {
+          headers: {
+            "x-auth-token": accessToken,
+          },
+        }
+      );
+      if (response.status === 200) {
+        getAllPosts();
+        fetchProfile();
+        setLoading(false);
+        return response.data;
+      }
+    }
+    return false;
+  }
+
   return (
     <UserContext.Provider
       value={{
@@ -267,6 +324,8 @@ export const UserProvider = ({ children }) => {
         isFriend,
         addFriend,
         removeFriend,
+        createPost,
+        updatePost
       }}
     >
       {children}

@@ -1,233 +1,232 @@
 .follow_btn {
-    background-color: #111827;
-    width: 150px;
-    border: 1px solid transparent;
-    border-radius: 5rem;
-    box-sizing: border-box;
-    color: #ffffff;
-    cursor: pointer;
-    flex: 0 0 auto;
-    font-size: 1.125rem;
-    font-weight: 600;
-    line-height: 1.5rem;
-    padding: 0.75rem 1rem;
-    text-align: center;
-    text-decoration: none #6b7280 solid;
-    text-decoration-thickness: auto;
-    transition-duration: 0.2s;
-    transition-property: background-color, border-color, color, fill, stroke;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    width: auto;
+  background-color: #111827;
+  width: 150px;
+  border: 1px solid transparent;
+  border-radius: 5rem;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  flex: 0 0 auto;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+  padding: 0.75rem 1rem;
+  text-align: center;
+  text-decoration: none #6b7280 solid;
+  text-decoration-thickness: auto;
+  transition-duration: 0.2s;
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: auto;
+}
+
+.follow_btn:hover {
+  background-color: #374151;
+}
+
+.follow_btn:focus {
+  box-shadow: none;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+@media (min-width: 768px) {
+  .follow_btn {
+    padding: 0.8rem;
   }
-  
-  .follow_btn:hover {
-    background-color: #374151;
-  }
-  
-  .follow_btn:focus {
-    box-shadow: none;
-    outline: 2px solid transparent;
-    outline-offset: 2px;
-  }
-  @media (min-width: 768px) {
-    .follow_btn {
-      padding: 0.8rem;
-    }
-  }
-  
-  .container {
-    display: flex;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0;
+  padding-bottom: 5rem;
+}
+.user_card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #ebb1a3;
+  padding: 2rem;
+}
+.user_header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 4rem;
+  padding-left: 4rem;
+  width: 100%;
+}
+
+.user_image img {
+  border-radius: 50%;
+  height: 150px;
+  width: 150px;
+}
+.user_image {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.user_name {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.user_bio {
+  font-size: 1.25rem;
+  font-weight: 400;
+}
+
+.user_email {
+  font-size: 1.25rem;
+  font-weight: 400;
+}
+
+.user_details_item_count {
+  font-size: 1.25rem;
+  font-weight: 400;
+}
+
+.user_info {
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.mutual_friends {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  flex: 1 1 0%;
+  padding-top: 2rem;
+}
+
+.mutual_friends_header {
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.mutual_friends_list {
+  margin: 5%;
+  margin-top: 0;
+
+  padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.user_posts {
+  flex: 1 1 0%;
+  padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.no_info_text {
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+}
+.user_posts_header {
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.user_posts_list {
+  padding: 3rem;
+  padding-top: 2rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.user_controls {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 900px) {
+  .user_info {
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    justify-content: space-between;
-    padding-top: 0;
-    padding-bottom: 5rem;
-  }
-  .user_card {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: #ebb1a3;
-    padding: 2rem;
   }
   .user_header {
-    display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    padding-right: 4rem;
-    padding-left: 4rem;
-    width: 100%;
+    justify-content: center;
   }
-  
-  .user_image img {
-    border-radius: 50%;
-    height: 150px;
-    width: 150px;
+  .user_name {
+    font-size: 1.5rem;
+  }
+  .user_bio {
+    font-size: 1rem;
+  }
+  .user_email {
+    font-size: 1rem;
+  }
+  .user_details_item_count {
+    font-size: 1rem;
   }
   .user_image {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 2rem;
+    padding-bottom: 2rem;
   }
-  
-  .user_name {
-    font-size: 2rem;
-    font-weight: 600;
-  }
-  
-  .user_bio {
-    font-size: 1.25rem;
-    font-weight: 400;
-  }
-  
-  .user_email {
-    font-size: 1.25rem;
-    font-weight: 400;
-  }
-  
   .user_details_item_count {
-    font-size: 1.25rem;
-    font-weight: 400;
+    padding-top: 1rem;
   }
-  
-  .user_info {
-    width: 100%;
-    display: flex;
-    flex-direction: row-reverse;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-  
-  .mutual_friends {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  
-    flex: 1 1 0%;
-    padding-top: 2rem;
-  }
-  
-  .mutual_friends_header {
-    font-size: 1.5rem;
-    font-weight: 600;
-    text-align: center;
-  }
-  
-  .mutual_friends_list {
-    margin: 5%;
-    padding-top: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1.5rem;
-  }
-  
   .user_posts {
-    flex: 1 1 0%;
     padding-top: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .no_info_text {
-    font-size: 1.5rem;
-    font-weight: 600;
-    text-align: center;
-  }
-  .user_posts_header {
-    font-size: 1.5rem;
-    font-weight: 600;
-    text-align: center;
-  }
-  
-  .user_posts_list {
-    padding: 3rem;
-    padding-top: 2rem;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 2rem;
-    align-items: center;
-    justify-content: center;
   }
 
-  .user_controls
-  {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      gap: 2rem;
-      flex-wrap: wrap;
+  .user_details_item_count {
+    padding-top: 1rem;
   }
-  
-  @media (max-width: 900px) {
-    .user_info {
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-    .user_header {
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-    .user_name {
-      font-size: 1.5rem;
-    }
-    .user_bio {
-      font-size: 1rem;
-    }
-    .user_email {
-      font-size: 1rem;
-    }
-    .user_details_item_count {
-      font-size: 1rem;
-    }
-    .user_image {
-      padding-bottom: 2rem;
-    }
-    .user_details_item_count {
-      padding-top: 1rem;
-    }
-    .user_posts {
-      padding-top: 2rem;
-    }
-  
-    .user_details_item_count {
-      padding-top: 1rem;
-    }
-    .user_posts {
-      padding-top: 2rem;
-    }
-    .mutual_friends {
-      padding-top: 2rem;
-    }
+  .user_posts {
+    padding-top: 2rem;
   }
-  
-  @media (max-width:500px) {
-    .user_image
-    {
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      justify-content: center;
-    }
-    .user_header
-    {
-      gap: 0;
-      padding: 0;
-    }
+  .mutual_friends {
+    padding-top: 2rem;
   }
+}
+
+@media (max-width: 500px) {
+  .user_image {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+  }
+  .user_header {
+    gap: 0;
+    padding: 0;
+  }
+}

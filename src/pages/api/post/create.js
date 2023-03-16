@@ -6,13 +6,17 @@ async function handler(req, res) {
   if (req.method === "POST") {
     try {
       await connectDB();
-      const { title, content, image } = req.body;
+      let { title, content, image } = req.body;
+      if(!image)
+      {
+        image="";
+      }
       const { uid } = req.user;
       const user = await User.findOne({ uid: uid });
       const post = new Post({
-        title: title,
-        content: content,
-        image: image,
+        title,
+        content,
+        image,
         creator: user._id,
       });
 

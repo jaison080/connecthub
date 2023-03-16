@@ -14,7 +14,11 @@ function UserCard({ user }) {
       <div className={styles.first_row}>
         <div
           className={styles.profile_image_wrapper}
-          onClick={() => router.push(`/users/${user._id}`)}
+          onClick={() => {
+            profile && user._id === profile._id
+              ? router.push("/profile")
+              : router.push(`/users/${user._id}`);
+          }}
         >
           <img src={user.image} alt="" />
         </div>
@@ -31,14 +35,22 @@ function UserCard({ user }) {
       </div>
       <div
         className={styles.user_details}
-        onClick={() => router.push(`/users/${user._id}`)}
+        onClick={() => {
+          profile && user._id === profile._id
+            ? router.push("/profile")
+            : router.push(`/users/${user._id}`);
+        }}
       >
         <div className={styles.user_name}>{user.name}</div>
         <div className={styles.user_username}>@{user.email.split("@")[0]}</div>
       </div>
       <div
         className={styles.bio}
-        onClick={() => router.push(`/users/${user._id}`)}
+        onClick={() => {
+          profile && user._id === profile._id
+            ? router.push("/profile")
+            : router.push(`/users/${user._id}`);
+        }}
       >
         {user.bio
           ? user.bio
@@ -46,7 +58,11 @@ function UserCard({ user }) {
       </div>
       <div
         className={styles.footer}
-        onClick={() => router.push(`/users/${user._id}`)}
+        onClick={() => {
+          profile && user._id === profile._id
+            ? router.push("/profile")
+            : router.push(`/users/${user._id}`);
+        }}
       >
         <div className={styles.footer_text}>
           <b>{user.friends.length}</b> Friends

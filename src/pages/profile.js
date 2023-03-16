@@ -7,18 +7,27 @@ import styles from "../styles/Profile.module.css";
 import { IoCreate } from "react-icons/io5";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import { FaUserEdit } from "react-icons/fa";
+import AddPostModal from "@/components/AddPostModal/AddPostModal";
 
 function Profile() {
   const router = useRouter();
   const { profile, loading } = useContext(UserContext);
+  const [open, setOpen] = React.useState(false);
 
-  console.log(profile);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   if (loading) {
     return <div>Loading...</div>;
   }
   return (
     <>
+      <AddPostModal open={open} handleClose={handleClose} />
       <div className={styles.container}>
         <div className={styles.user_card}>
           <BsFillArrowLeftCircleFill
@@ -48,6 +57,7 @@ function Profile() {
                   alignItems: "center",
                   gap: "5px",
                 }}
+                onClick={handleClickOpen}
               >
                 <IoCreate color="#fff" size={20} />
                 <div>Create Post</div>

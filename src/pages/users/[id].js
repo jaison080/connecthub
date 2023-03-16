@@ -26,7 +26,6 @@ function User() {
   const { id } = router.query;
   async function fetchUser() {
     const user = users.find((user) => user._id === id);
-    console.log(user);
     setUser(user);
   }
   useEffect(() => {

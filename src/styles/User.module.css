@@ -124,6 +124,7 @@
 
 .mutual_friends_list {
   margin: 5%;
+  margin-top: 0;
   padding-top: 2rem;
   display: flex;
   flex-direction: column;
