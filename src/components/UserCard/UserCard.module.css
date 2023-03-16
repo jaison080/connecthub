@@ -34,7 +34,7 @@
   font-size: 1.125rem;
   font-weight: 600;
   line-height: 1.5rem;
-  padding: 1.25rem 1.75rem;
+  padding: 0.75rem 1rem;
   text-align: center;
   text-decoration: none #6b7280 solid;
   text-decoration-thickness: auto;
@@ -90,14 +90,14 @@
 
 @media (max-width: 768px) {
   .card {
-    width: 320px;
+    width: 420px;
   }
   .footer {
     justify-content: center;
   }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 500px) {
   .card {
     width: 100%;
   }
