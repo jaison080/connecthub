@@ -16,6 +16,8 @@ export const UserProvider = ({ children }) => {
   const [profile, setProfile] = useState();
   const [signedInUser, setSignedInUser] = useState();
   const [loading, setLoading] = useState(true);
+  const [posts, setPosts] = useState([]);
+  const [users, setUsers] = useState([]);
   const auth = getAuth(app);
 
   //On Auth State Changed Of Firebase
@@ -32,8 +34,7 @@ export const UserProvider = ({ children }) => {
     });
   }, [signedInUser]);
 
-
-//Sign Out Function
+  //Sign Out Function
   async function signOutOfGoogle() {
     signOut(auth)
       .then(() => {
@@ -43,8 +44,7 @@ export const UserProvider = ({ children }) => {
       .catch((error) => {});
   }
 
-
-//Fetch User Profile from DB
+  //Fetch User Profile from DB
   async function fetchProfile() {
     try {
       if (signedInUser) {
@@ -107,6 +107,11 @@ export const UserProvider = ({ children }) => {
     }
   }
 
+  useEffect(() => {
+    getAllPosts();
+    getAllUsers();
+  }, []);
+
   //Google Sign In Of Firebase
   async function signInWithGoogle() {
     signInWithPopup(auth, provider).catch((error) => {
@@ -114,11 +119,35 @@ export const UserProvider = ({ children }) => {
     });
   }
 
+  //Get All Posts
+  async function getAllPosts() {
+    setLoading(true);
+    const response = await axios.get("/api/post");
+    if (response.status === 200) {
+      console.log(response.data);
+      setPosts(response.data);
+      setLoading(false);
+    }
+  }
+
+  //Get All Users
+  async function getAllUsers() {
+    setLoading(true);
+    const response = await axios.get("/api/user");
+    if (response.status === 200) {
+      console.log(response.data);
+      setUsers(response.data);
+      setLoading(false);
+    }
+  }
+
   return (
     <UserContext.Provider
       value={{
         profile,
         loading,
+        posts,
+        users,
         signInWithGoogle,
         signOutOfGoogle,
       }}

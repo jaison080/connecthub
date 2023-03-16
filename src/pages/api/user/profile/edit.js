@@ -8,7 +8,7 @@ async function handler(req, res) {
       await connectDB();
 
       const { uid } = req.user;
-      let { name, image } = req.body;
+      let { name, image, bio } = req.body;
       const user = await User.findOne({ uid: uid });
 
       if (!name) {
@@ -17,12 +17,16 @@ async function handler(req, res) {
       if (!image) {
         image = user.image;
       }
+      if (!bio) {
+        bio = user.bio ? user.bio : " ";
+      }
 
       if (!user) {
         return res.status(404).json({ message: "User not found" });
       }
       user.name = name;
       user.image = image;
+      user.bio = bio;
       await user.save();
 
       res.status(200).json({ message: "User updated", data: user });
