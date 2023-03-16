@@ -87,7 +87,9 @@ function User() {
           <b>{user?.friends?.length}</b> Friends
         </div>
       </div>
-      <div className={styles.user_info}>
+      <div className={styles.user_info} style={{
+        display: mutualFriends.length === 0 && userPosts.length === 0 ? "block" : "flex",
+      }}>
         {mutualFriends.length === 0 && userPosts.length === 0 ? (
           <div className={styles.no_info_text}>No mutual friends or posts</div>
         ) : null}

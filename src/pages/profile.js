@@ -108,7 +108,7 @@ function Profile() {
           </div>
         </div>
         <div className={styles.user_info}>
-          {profile?.posts?.length === 0 && profile?.friends?.length === 0 ? (
+          {profile?.posts?.reverse().length === 0 && profile?.friends?.length === 0 ? (
             <div className={styles.no_info_text}>
               No Posts or Friends to show
             </div>
