@@ -11,6 +11,7 @@ import styles from "../styles/Profile.module.css";
 import { IoCreate } from "react-icons/io5";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import { FaUserEdit } from "react-icons/fa";
+import CustomTitle from "@/utils/customTitle";
 
 function Profile() {
   const router = useRouter();
@@ -36,6 +37,7 @@ function Profile() {
 
   return (
     <>
+    <CustomTitle title={"Profile"}/>
       <AddPostModal open={open} handleClose={handleClose} />
       {profile ? (
         <EditProfileModal
