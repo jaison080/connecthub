@@ -82,7 +82,6 @@ export const UserProvider = ({ children }) => {
             }
           });
       } catch (error) {
-        //Have to fix this code
         await axios
           .post(
             "/api/auth/signup",
