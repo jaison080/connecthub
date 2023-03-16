@@ -3,7 +3,7 @@ import { withAuth } from "../../../../utils/auth";
 import connectDB from "../../../../utils/connectDB";
 
 async function handler(req, res) {
-  if (req.method === "DELETE") {
+  if (req.method === "POST") {
     try {
       await connectDB();
       const { uid } = req.user;

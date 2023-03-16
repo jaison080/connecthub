@@ -142,6 +142,7 @@ export const UserProvider = ({ children }) => {
     }
   }
 
+  //Get Mutual Friends
   async function getMutualFriends(id) {
     if (signedInUser) {
       setLoading(true);
@@ -164,6 +165,8 @@ export const UserProvider = ({ children }) => {
       }
     }
   }
+
+  //Get Posts By User Id
   async function getPostsbyUserId(id) {
     setLoading(true);
     let temp = [];
@@ -175,6 +178,76 @@ export const UserProvider = ({ children }) => {
     setUserPosts(temp);
     setLoading(false);
     return;
+  }
+
+  //Check if User is Friend
+  function isFriend(id) {
+    if (signedInUser) {
+      setLoading(true);
+      const friends = profile?.friends;
+      if (friends) {
+        const friend = friends.find((friend) => friend._id === id);
+        if (friend) {
+          setLoading(false);
+          return true;
+        } else {
+          setLoading(false);
+          return false;
+        }
+      }
+    }
+    return false;
+  }
+
+  //Add Friend Function
+  async function addFriend(id) {
+    if (signedInUser) {
+      setLoading(true);
+      const accessToken = await signedInUser.getIdToken();
+      const response = await axios.post(
+        "/api/user/friends/add",
+        {
+          friendId: id,
+        },
+        {
+          headers: {
+            "x-auth-token": accessToken,
+          },
+        }
+      );
+      if (response.status === 200) {
+        setLoading(false);
+        fetchProfile();
+        return response.data;
+      }
+    }
+    return false;
+  }
+
+  //Remove Friend Function
+  async function removeFriend(id) {
+    if (signedInUser) {
+      setLoading(true);
+      const accessToken = await signedInUser.getIdToken();
+      const response = await axios.post(
+        "/api/user/friends/remove",
+        {
+          friendId: id,
+        },
+        {
+          headers: {
+            "x-auth-token": accessToken,
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        setLoading(false);
+        fetchProfile();
+        return response.data;
+      }
+    }
+    return false;
   }
 
   return (
@@ -191,6 +264,9 @@ export const UserProvider = ({ children }) => {
         signOutOfGoogle,
         getMutualFriends,
         getPostsbyUserId,
+        isFriend,
+        addFriend,
+        removeFriend,
       }}
     >
       {children}

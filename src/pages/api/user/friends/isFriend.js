@@ -5,11 +5,14 @@ async function handler(req, res) {
   if (req.method === "POST") {
     const { id } = req.body;
     const { uid } = req.user;
-    const friendsList = User.find({ uid: uid });
-    if (friendsList.includes(id)) {
-      res.status(200).json({ isFriend: true });
+    const friendsList = await User.findOne({ uid: uid }).friends;
+    if (!friendsList) {
+      return res.status(200).json({ isFriend: false });
+    }
+    if (friendsList?.includes(id)) {
+      return res.status(200).json({ isFriend: true });
     } else {
-      res.status(200).json({ isFriend: false });
+      return res.status(200).json({ isFriend: false });
     }
   }
 }
