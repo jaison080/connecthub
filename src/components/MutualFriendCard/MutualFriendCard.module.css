@@ -85,6 +85,8 @@
 @media (max-width: 500px) {
   .card {
     width: 100%;
+    padding: 0.8rem;
+    gap: 0.4rem;
   }
   .profile_image_wrapper img {
     width: 40px;
@@ -93,7 +95,7 @@
     border-radius: 50%;
   }
   .user_name {
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 600;
     width: 200px;
   }
