@@ -1,105 +1,104 @@
 .card {
-    display: flex;
-    width: 520px;
-    border-radius: 3rem;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    background: #fff;
-    gap: 1rem;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    padding: 1rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
+  display: flex;
+  width: 520px;
+  border-radius: 3rem;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  gap: 1rem;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  padding: 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+.profile_image_wrapper img {
+  width: 80px;
+  height: auto;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+.follow_btn {
+  background-color: #111827;
+  border: 1px solid transparent;
+  border-radius: 5rem;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  flex: 0 0 auto;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+  padding: 0.75rem 1rem;
+  text-align: center;
+  text-decoration: none #6b7280 solid;
+  text-decoration-thickness: auto;
+  transition-duration: 0.2s;
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: auto;
+}
+
+.follow_btn:hover {
+  background-color: #374151;
+}
+
+.follow_btn:focus {
+  box-shadow: none;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+.user_name {
+  font-size: 1.5rem;
+  font-weight: 600;
+  width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+@media (min-width: 768px) {
+  .follow_btn {
+    padding: 0.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    width: 420px;
   }
   .profile_image_wrapper img {
-    width: 80px;
+    width: 60px;
     height: auto;
     object-fit: contain;
     border-radius: 50%;
   }
-  
-  .follow_btn {
-    background-color: #111827;
-    border: 1px solid transparent;
-    border-radius: 5rem;
-    box-sizing: border-box;
-    color: #ffffff;
-    cursor: pointer;
-    flex: 0 0 auto;
-    font-size: 1.125rem;
+  .user_name {
+    font-size: 1.2rem;
     font-weight: 600;
-    line-height: 1.5rem;
-    padding: 0.75rem 1rem;
-    text-align: center;
-    text-decoration: none #6b7280 solid;
-    text-decoration-thickness: auto;
-    transition-duration: 0.2s;
-    transition-property: background-color, border-color, color, fill, stroke;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    width: auto;
   }
-  
-  .follow_btn:hover {
-    background-color: #374151;
+}
+
+@media (max-width: 500px) {
+  .card {
+    width: 100%;
   }
-  
-  .follow_btn:focus {
-    box-shadow: none;
-    outline: 2px solid transparent;
-    outline-offset: 2px;
+  .profile_image_wrapper img {
+    width: 40px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 50%;
   }
   .user_name {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: 600;
-    width: 100%;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
+    width: 200px;
   }
-  @media (min-width: 768px) {
-    .follow_btn {
-      padding: 0.8rem;
-    }
+  .follow_btn {
+    padding: 0.5rem;
+    font-size: 0.9rem;
   }
-  
-  @media (max-width: 768px) {
-    .card {
-      width: 420px;
-    }
-    .profile_image_wrapper img {
-      width: 60px;
-      height: auto;
-      object-fit: contain;
-      border-radius: 50%;
-    }
-    .user_name {
-      font-size: 1.2rem;
-      font-weight: 600;
-    }
-  }
-  
-  @media (max-width: 500px) {
-    .card {
-      width: 100%;
-
-    }
-    .profile_image_wrapper img {
-      width: 40px;
-      height: auto;
-      object-fit: contain;
-      border-radius: 50%;
-    }
-    .user_name {
-      font-size: 1.2rem;
-      font-weight: 600;
-    }
-    .follow_btn {
-      padding: 0.5rem;
-      font-size: 0.9rem;
-    }
-  }
-  
+}

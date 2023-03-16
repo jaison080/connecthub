@@ -1,15 +1,19 @@
 import React from "react";
 import styles from "./PostCard.module.css";
 
-function PostCard({ post }) {
+function PostCard({ post,name,image }) {
   return (
     <div className={styles.card}>
       <div className={styles.card_row}>
         <div className={styles.image_wrapper}>
-          <img src={post.creator.image} alt="" />
+          <img src={
+            post.creator.image ? post.creator.image : image
+          } alt="" />
         </div>
         <div className={styles.user_details}>
-          <div className={styles.user_name}>{post.creator.name}</div>
+          <div className={styles.user_name}>{
+            post.creator.name ? post.creator.name : name
+          }</div>
           <div className={styles.user_time}>4 Days Ago</div>
         </div>
       </div>

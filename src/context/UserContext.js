@@ -202,7 +202,6 @@ export const UserProvider = ({ children }) => {
   //Add Friend Function
   async function addFriend(id) {
     if (signedInUser) {
-      setLoading(true);
       const accessToken = await signedInUser.getIdToken();
       const response = await axios.post(
         "/api/user/friends/add",
@@ -219,8 +218,6 @@ export const UserProvider = ({ children }) => {
         getAllUsers();
         fetchProfile();
 
-        setLoading(false);
-
         return response.data;
       }
     }
@@ -230,7 +227,6 @@ export const UserProvider = ({ children }) => {
   //Remove Friend Function
   async function removeFriend(id) {
     if (signedInUser) {
-      setLoading(true);
       const accessToken = await signedInUser.getIdToken();
       const response = await axios.post(
         "/api/user/friends/remove",
