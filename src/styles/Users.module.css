@@ -9,9 +9,10 @@
   padding-bottom: 6rem;
 }
 .header_title {
-  font-size: 2rem;
-  font-weight: 500;
-  color: #a6423d;
+  padding-top: 1rem;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #a6432d;
 }
 .users_container {
   display: flex;
@@ -26,11 +27,11 @@
 @media (max-width: 768px) {
   .main_container {
     padding: 2rem;
-    padding-top: 4rem;
+    padding-top: 6rem;
     padding-bottom: 4rem;
   }
   .header_title {
-    font-size: 1.5rem;
+    font-size: 2.5rem;
   }
   .users_container {
     flex-direction: column;

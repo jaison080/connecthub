@@ -53,7 +53,7 @@ function Navbar() {
             }}
             style={{ cursor: "pointer" }}
           >
-            Social Media
+            ConnectHub
           </div>
         </div>
         <div className={styles.navbar__links}>
@@ -184,7 +184,7 @@ function Navbar() {
               data-aos="fade-right"
               data-aos-duration="600"
             >
-              Home
+              ConnectHub
             </div>
             <div
               className={styles.navbar__items_mob}

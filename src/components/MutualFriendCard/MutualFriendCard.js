@@ -14,6 +14,7 @@ function MutualFriendCard({ user }) {
         style={{
           cursor: "pointer",
         }}
+        data-aos="zoom-in"
       >
         <div
           className={styles.profile_image_wrapper}

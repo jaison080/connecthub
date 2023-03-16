@@ -14,7 +14,7 @@ function Footer() {
               router.push("/");
             }}
           >
-            Social Media
+            ConnectHub
           </div>
           <div className={styles.footer__left__links}>
             <div

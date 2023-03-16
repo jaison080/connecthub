@@ -10,7 +10,11 @@ function UserCard({ user }) {
   const router = useRouter();
 
   return (
-    <div className={styles.card} style={{ cursor: "pointer" }}>
+    <div
+      className={styles.card}
+      style={{ cursor: "pointer" }}
+      data-aos="zoom-in"
+    >
       <div className={styles.first_row}>
         <div
           className={styles.profile_image_wrapper}

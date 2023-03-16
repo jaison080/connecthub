@@ -19,7 +19,7 @@ function PostCard({ post, name, image }) {
   return (
     <>
       <EditPostModal open={open} handleClose={handleClose} post={post} />
-      <div className={styles.card}>
+      <div className={styles.card} data-aos="zoom-in">
         <div className={styles.card_row}>
           <div className={styles.image_wrapper}>
             <img src={post.creator.image ? post.creator.image : image} alt="" />
@@ -30,12 +30,15 @@ function PostCard({ post, name, image }) {
             </div>
             <div className={styles.user_time}>4 Days Ago</div>
           </div>
-          {post.creator === profile?._id ? (
-            <div style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "10px"
-            }}>
+          {post.creator === profile?._id ||
+          post.creator._id === profile?._id ? (
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "10px",
+              }}
+            >
               <Button
                 variant="outlined"
                 color="primary"
@@ -46,7 +49,7 @@ function PostCard({ post, name, image }) {
               <Button
                 variant="outlined"
                 color="error"
-                onClick={()=>deletePost(post._id)}
+                onClick={() => deletePost(post._id)}
               >
                 Delete
               </Button>
