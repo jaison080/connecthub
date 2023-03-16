@@ -6,13 +6,19 @@ import {
   DialogTitle,
   TextField,
 } from "@mui/material";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 
 function EditProfileModal({ open, handleClose, profile }) {
   const { updateProfile } = useContext(UserContext);
   const [name, setName] = React.useState(profile?.name);
   const [bio, setBio] = React.useState(profile?.bio);
   const [image, setImage] = React.useState(profile?.image);
+
+  useEffect(() => {
+    setName(profile?.name);
+    setBio(profile?.bio);
+    setImage(profile?.image);
+  }, [profile]);
 
   return (
     <Dialog fullWidth={true} maxWidth="sm" open={open} onClose={handleClose}>

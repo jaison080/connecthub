@@ -6,13 +6,19 @@ import {
   DialogTitle,
   TextField,
 } from "@mui/material";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 
 function EditPostModal({ open, handleClose, post }) {
   const { updatePost } = useContext(UserContext);
   const [title, setTitle] = React.useState(post.title);
   const [content, setContent] = React.useState(post.content);
   const [image, setImage] = React.useState(post.image);
+
+  useEffect(() => {
+    setTitle(post.title);
+    setContent(post.content);
+    setImage(post.image);
+  }, [post]);
 
   return (
     <Dialog fullWidth={true} maxWidth="sm" open={open} onClose={handleClose}>
