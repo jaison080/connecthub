@@ -6,15 +6,9 @@ export default function Home() {
     useContext(UserContext);
   return (
     <>
-      {profile ? (
-        <>
-          <h2>{profile.email}</h2>
-          <button onClick={signOutOfGoogle}>Sign Out</button>
-        </>
-      ) : (
-        <button onClick={signInWithGoogle}>Sign in with Google</button>
-      )}
-      {/* {loading ? <h3>Loading....</h3> : ""} */}
+     <div>
+      
+     </div>
     </>
   );
 }
