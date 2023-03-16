@@ -14,7 +14,7 @@ export default function Home() {
       ) : (
         <button onClick={signInWithGoogle}>Sign in with Google</button>
       )}
-      {loading ? <h3>Loading....</h3> : ""}
+      {/* {loading ? <h3>Loading....</h3> : ""} */}
     </>
   );
 }

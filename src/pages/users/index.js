@@ -5,9 +5,9 @@ import styles from "../../styles/Users.module.css";
 
 function Users() {
   const { users, loading } = useContext(UserContext);
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  // if (loading) {
+  //   return <div>Loading...</div>;
+  // }
   return (
     <>
       <div className={styles.main_container}>
