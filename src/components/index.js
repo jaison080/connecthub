@@ -1,2 +1,13 @@
 export { default as PostCard } from "./PostCard/PostCard";
 export { default as UserCard } from "./UserCard/UserCard";
+export { default as About } from "./About/About";
+export { default as AdditionalDetails } from "./AdditionalDetails/AdditionalDetails";
+export { default as AddPostModal } from "./AddPostModal/AddPostModal";
+export { default as Details } from "./Details/Details";
+export { default as EditPostModal } from "./EditPostModal/EditPostModal";
+export { default as EditProfileModal } from "./EditProfileModal/EditProfileModal";
+export { default as MoreDetails } from "./MoreDetails/MoreDetails";
+export { default as Footer } from "./Footer/Footer";
+export { default as Navbar } from "./Navbar/Navbar";
+export { default as Hero } from "./Hero/Hero";
+export { default as MutualFriendCard } from "./MutualFriendCard/MutualFriendCard";

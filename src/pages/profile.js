@@ -1,5 +1,9 @@
-import { PostCard } from "@/components";
-import MutualFriendCard from "@/components/MutualFriendCard/MutualFriendCard";
+import {
+  AddPostModal,
+  EditProfileModal,
+  MutualFriendCard,
+  PostCard,
+} from "@/components";
 import { UserContext } from "@/context/UserContext";
 import { useRouter } from "next/router";
 import React, { useContext } from "react";
@@ -7,8 +11,6 @@ import styles from "../styles/Profile.module.css";
 import { IoCreate } from "react-icons/io5";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import { FaUserEdit } from "react-icons/fa";
-import AddPostModal from "@/components/AddPostModal/AddPostModal";
-import EditProfileModal from "@/components/EditProfileModal/EditProfileModal";
 
 function Profile() {
   const router = useRouter();
@@ -32,9 +34,6 @@ function Profile() {
     setOpen1(false);
   };
 
-  // if (loading) {
-  //   return <div>Loading...</div>;
-  // }
   return (
     <>
       <AddPostModal open={open} handleClose={handleClose} />

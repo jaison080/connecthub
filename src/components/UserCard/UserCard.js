@@ -1,6 +1,6 @@
 import { UserContext } from "@/context/UserContext";
 import { useRouter } from "next/router";
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext } from "react";
 import styles from "./UserCard.module.css";
 
 function UserCard({ user }) {

@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import styles from "./Navbar.module.css";
 import { HiMenuAlt2 } from "react-icons/hi";
 import { useRouter } from "next/router";
-import { Avatar, Drawer } from "@mui/material";
+import { Drawer } from "@mui/material";
 import { Menu, MenuItem, MenuButton } from "@szhsin/react-menu";
 import { UserContext } from "@/context/UserContext";
 import { IoCreate } from "react-icons/io5";

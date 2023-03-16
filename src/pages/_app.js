@@ -1,5 +1,5 @@
-import Footer from "@/components/Footer/Footer";
-import Navbar from "@/components/Navbar/Navbar";
+
+import { Footer, Navbar } from "@/components";
 import { UserProvider } from "@/context/UserContext";
 import "@/styles/globals.css";
 import Aos from "aos";

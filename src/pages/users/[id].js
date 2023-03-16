@@ -1,5 +1,4 @@
-import { PostCard, UserCard } from "@/components";
-import MutualFriendCard from "@/components/MutualFriendCard/MutualFriendCard";
+import { MutualFriendCard, PostCard } from "@/components";
 import { UserContext } from "@/context/UserContext";
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
