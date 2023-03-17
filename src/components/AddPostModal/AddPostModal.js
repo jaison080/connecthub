@@ -8,7 +8,7 @@ import {
   TextField,
 } from "@mui/material";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 
 function AddPostModal({ open, handleClose }) {
   const { createPost } = useContext(UserContext);
@@ -16,6 +16,10 @@ function AddPostModal({ open, handleClose }) {
   const [content, setContent] = React.useState("");
   const [image, setImage] = React.useState(null);
   const [file, setFile] = React.useState(null);
+
+  useEffect(() => {
+    setFile(null);
+  }, [open]);
 
   const handleUploadFile = async (file) => {
     const storageRef = ref(
@@ -26,15 +30,9 @@ function AddPostModal({ open, handleClose }) {
       }`
     );
 
-    uploadBytes(storageRef, file).then(() => {
-      getDownloadURL(storageRef)
-        .then((url) => {
-          setImage(url);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    });
+    await uploadBytes(storageRef, file);
+    const downloadURL = await getDownloadURL(storageRef);
+    return downloadURL;
   };
 
   return (
@@ -73,7 +71,6 @@ function AddPostModal({ open, handleClose }) {
           />
           {file && <img src={URL.createObjectURL(file)} alt="" />}
 
-          <button onClick={() => handleUploadFile(file)}>Upload</button>
 
           <div
             style={{
@@ -100,7 +97,13 @@ function AddPostModal({ open, handleClose }) {
               color="primary"
               sx={{ mt: 2 }}
               onClick={() => {
-                createPost(title, content, image);
+                if (file) {
+                  handleUploadFile(file).then((url) => {
+                    createPost(title, content, url);
+                  });
+                } else {
+                  createPost(title, content, image);
+                }
                 setTitle("");
                 setContent("");
                 setImage(null);

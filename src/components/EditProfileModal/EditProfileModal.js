@@ -20,15 +20,9 @@ function EditProfileModal({ open, handleClose, profile }) {
   const handleUploadFile = async (file) => {
     const storageRef = ref(storage, `profilePhoto/${profile?._id}`);
 
-    uploadBytes(storageRef, file).then(() => {
-      getDownloadURL(storageRef)
-        .then((url) => {
-          setImage(url);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    });
+    await uploadBytes(storageRef, file);
+    const downloadURL = await getDownloadURL(storageRef);
+    return downloadURL;
   };
 
   useEffect(() => {
@@ -73,14 +67,7 @@ function EditProfileModal({ open, handleClose, profile }) {
             }}
           >
             <input type="file" onChange={(e) => setFile(e.target.files[0])} />
-            <img
-              src={file ? URL.createObjectURL(file) : image}
-              alt=""
-              style={{ width: "100px", height: "100px", objectFit: "cover" }}
-            />
-            <button onClick={() => handleUploadFile(file)}>
-              Upload Image (Optional)
-            </button>
+            <img src={file ? URL.createObjectURL(file) : image} alt="" />
           </div>
           <div
             style={{
@@ -108,7 +95,11 @@ function EditProfileModal({ open, handleClose, profile }) {
               color="primary"
               sx={{ mt: 2 }}
               onClick={() => {
-                updateProfile(profile._id, name, bio, image);
+                if (file)
+                  handleUploadFile(file).then((url) => {
+                    updateProfile(profile._id, name, bio, url);
+                  });
+                else updateProfile(profile._id, name, bio, image);
                 setName("");
                 setBio("");
                 setImage(null);

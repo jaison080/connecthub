@@ -31,16 +31,9 @@ function EditPostModal({ open, handleClose, post }) {
         Math.random().toString(36).substring(2, 15)
       }`
     );
-
-    uploadBytes(storageRef, file).then(() => {
-      getDownloadURL(storageRef)
-        .then((url) => {
-          setImage(url);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    });
+    await uploadBytes(storageRef, file);
+    const downloadURL = await getDownloadURL(storageRef);
+    return downloadURL;
   };
 
   return (
@@ -76,8 +69,6 @@ function EditPostModal({ open, handleClose, post }) {
             alt=""
           />
 
-          <button onClick={() => handleUploadFile(file)}>Upload</button>
-
           <div
             style={{
               display: "flex",
@@ -103,7 +94,13 @@ function EditPostModal({ open, handleClose, post }) {
               color="primary"
               sx={{ mt: 2 }}
               onClick={() => {
-                updatePost(post._id, title, content, image);
+                if (file) {
+                  handleUploadFile(file).then((url) => {
+                    updatePost(post._id, title, content, url);
+                  });
+                } else {
+                  updatePost(post._id, title, content, image);
+                }
                 setTitle("");
                 setContent("");
                 setImage(null);
