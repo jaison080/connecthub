@@ -4,6 +4,7 @@ import React, { useContext } from "react";
 import { toast } from "react-hot-toast";
 import styles from "./UserCard.module.css";
 
+
 function UserCard({ user }) {
   const { isFriend, addFriend, removeFriend, profile } =
     useContext(UserContext);

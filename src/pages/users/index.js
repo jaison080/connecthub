@@ -4,10 +4,15 @@ import CustomTitle from "@/utils/customTitle";
 import axios from "axios";
 import React, { useContext, useEffect } from "react";
 import styles from "../../styles/Users.module.css";
+import Masonry from "react-masonry-css";
 
 function Users() {
   const { users, setUsers, loading, allUsers } = useContext(UserContext);
   const [query, setQuery] = React.useState("");
+  const breakpointColumnsObj = {
+    default: 2,
+    1200: 1,
+  };
 
   const searchUsers = async (query) => {
     if (query === "") {
@@ -35,11 +40,17 @@ function Users() {
           }}
         />
         <div className={styles.users_container}>
-          {users.length === 0 ? (
-            <div className={styles.no_users}>No users found</div>
-          ) : (
-            users.map((user) => <UserCard key={user._id} user={user} />)
-          )}
+          <Masonry
+            breakpointCols={breakpointColumnsObj}
+            className="my-masonry-grid"
+            columnClassName="my-masonry-grid_column"
+          >
+            {users.length === 0 ? (
+              <div className={styles.no_users}>No users found</div>
+            ) : (
+              users.map((user) => <UserCard key={user._id} user={user} />)
+            )}
+          </Masonry>
         </div>
       </div>
     </>
