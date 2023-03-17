@@ -23,7 +23,22 @@
   gap: 1.5rem;
   width: 100%;
 }
-
+.main_container input {
+  width: 250px;
+  height: 40px;
+  border-radius: 0.5rem;
+  border: 1px solid #a6432d;
+  padding: 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  outline: none;
+}
+.no_users
+{
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #a6432d;
+}
 @media (max-width: 768px) {
   .main_container {
     padding: 2rem;

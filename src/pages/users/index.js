@@ -7,7 +7,7 @@ import React, { useContext, useEffect } from "react";
 import styles from "../../styles/Users.module.css";
 
 function Users() {
-  const { users, setUsers, allUsers } = useContext(UserContext);
+  const { users, setUsers, loading , allUsers } = useContext(UserContext);
   const [initial, setInitial] = React.useState([]);
   const searchFun = (queryParam, setUsers) => {
     axios
@@ -43,7 +43,7 @@ function Users() {
         <div className={styles.header_title}>Users</div>
         <input
           type="text"
-          placeholder="Search"
+          placeholder="Search Users"
           onChange={(e) => onSearch(e.target.value)}
         />
         <div className={styles.users_container}>

@@ -16,6 +16,7 @@ body::-webkit-scrollbar {
 body::-webkit-scrollbar-track {
   background: #742e1f;
 }
+
 a {
   color: inherit;
   text-decoration: none;
