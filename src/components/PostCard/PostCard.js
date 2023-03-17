@@ -91,7 +91,9 @@ function PostCard({ post, name, image }) {
           </div>
           <div className={styles.content_wrapper}>
             <div className={styles.user_title}>{post.title}</div>
-            <div className={styles.user_content}>{post.content}</div>
+            <div className={styles.user_content} style={{
+              whiteSpace: "pre-wrap",
+            }}>{post.content}</div>
             <img src={post.image} alt="" />
           </div>
           <div className={styles.user_footer}>
