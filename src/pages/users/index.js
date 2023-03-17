@@ -7,8 +7,9 @@ import React, { useContext, useEffect } from "react";
 import styles from "../../styles/Users.module.css";
 
 function Users() {
-  const { users, setUsers, loading , allUsers } = useContext(UserContext);
+  const { users, setUsers, loading, allUsers } = useContext(UserContext);
   const [initial, setInitial] = React.useState([]);
+  const [query, setQuery] = React.useState("");
   const searchFun = (queryParam, setUsers) => {
     axios
       .get(`/api/user/search/${queryParam}`)
@@ -22,6 +23,8 @@ function Users() {
   };
   useEffect(() => {
     setInitial(allUsers);
+    setUsers(allUsers);
+    setQuery("");
   }, []);
 
   const debouncedSearch = debounce(searchFun, 500);
@@ -29,8 +32,6 @@ function Users() {
   const onSearch = (v) => {
     const search = debouncedSearch;
     if (!v) {
-      // when the user clear the field we don't want to perform a search, we need to clear the state and do nothing else
-      // debouncedSearch.clear();
       setUsers(initial);
     } else {
       search(v, setUsers);
@@ -44,7 +45,11 @@ function Users() {
         <input
           type="text"
           placeholder="Search Users"
-          onChange={(e) => onSearch(e.target.value)}
+          value={query}
+          onChange={(e) => {
+            setQuery(e.target.value);
+            onSearch(e.target.value);
+          }}
         />
         <div className={styles.users_container}>
           {users.length === 0 ? (
