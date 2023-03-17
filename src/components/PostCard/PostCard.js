@@ -9,13 +9,23 @@ import EditPostModal from "../EditPostModal/EditPostModal";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
 import styles from "./PostCard.module.css";
+import DeletePostModal from "../DeletePostModal/DeletePostModal";
 
 function PostCard({ post, name, image }) {
-  const { profile, deletePost, unlikePost, likePost } = useContext(UserContext);
+  const { profile, unlikePost, likePost } = useContext(UserContext);
   const [open, setOpen] = React.useState(false);
+  const [open1, setOpen1] = React.useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
+  };
+
+  const handleClickOpen1 = () => {
+    setOpen1(true);
+  };
+
+  const handleClose1 = () => {
+    setOpen1(false);
   };
 
   const handleClose = () => {
@@ -25,6 +35,7 @@ function PostCard({ post, name, image }) {
   return (
     <>
       <EditPostModal open={open} handleClose={handleClose} post={post} />
+      <DeletePostModal open={open1} handleClose={handleClose1} post={post} />
       <div className={styles.card} data-aos="zoom-in">
         {post.creator === profile?._id || post.creator?._id === profile?._id ? (
           <div
@@ -49,7 +60,7 @@ function PostCard({ post, name, image }) {
               color="red"
               style={{ cursor: "pointer" }}
               onClick={() => {
-                deletePost(post._id);
+                handleClickOpen1();
               }}
             />
           </div>

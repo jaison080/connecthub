@@ -104,17 +104,33 @@ function EditPostModal({ open, handleClose, post }) {
             }}
             onChange={(e) => setFile(e.target.files[0])}
           />
-          <img
-            src={file ? URL.createObjectURL(file) : image ? image : ""}
-            alt=""
-            style={{
-              width: "150px",
-              height: "150px",
-              alignSelf: "center",
-              objectFit: "cover",
-              borderRadius: "1rem",
-            }}
-          />
+          {image ? (
+            <img
+              src={file ? URL.createObjectURL(file) : image ? image : ""}
+              alt=""
+              style={{
+                width: "150px",
+                height: "150px",
+                alignSelf: "center",
+                objectFit: "cover",
+                borderRadius: "1rem",
+              }}
+            />
+          ) : (
+            file && (
+              <img
+                src={URL.createObjectURL(file)}
+                alt=""
+                style={{
+                  width: "150px",
+                  height: "150px",
+                  alignSelf: "center",
+                  objectFit: "cover",
+                  borderRadius: "1rem",
+                }}
+              />
+            )
+          )}
 
           <div
             style={{
