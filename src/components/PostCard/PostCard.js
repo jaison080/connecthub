@@ -1,11 +1,15 @@
 import { UserContext } from "@/context/UserContext";
 import { Button } from "@mui/material";
 import React, { useContext } from "react";
+import { toast } from "react-hot-toast";
+import { FaHeart, FaShareAlt } from "react-icons/fa";
 import EditPostModal from "../EditPostModal/EditPostModal";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+
 import styles from "./PostCard.module.css";
 
 function PostCard({ post, name, image }) {
-  const { profile, deletePost } = useContext(UserContext);
+  const { profile, deletePost, unlikePost, likePost } = useContext(UserContext);
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -22,16 +26,19 @@ function PostCard({ post, name, image }) {
       <div className={styles.card} data-aos="zoom-in">
         <div className={styles.card_row}>
           <div className={styles.image_wrapper}>
-            <img src={post.creator.image ? post.creator.image : image} alt="" />
+            <img
+              src={post.creator?.image ? post.creator.image : image}
+              alt=""
+            />
           </div>
           <div className={styles.user_details}>
             <div className={styles.user_name}>
-              {post.creator.name ? post.creator.name : name}
+              {post.creator?.name ? post.creator.name : name}
             </div>
             <div className={styles.user_time}>4 Days Ago</div>
           </div>
           {post.creator === profile?._id ||
-          post.creator._id === profile?._id ? (
+          post.creator?._id === profile?._id ? (
             <div
               style={{
                 display: "flex",
@@ -62,9 +69,50 @@ function PostCard({ post, name, image }) {
           <img src={post.image} alt="" />
         </div>
         <div className={styles.user_footer}>
-          <div className={styles.user_time}>40 Likes</div>
-          <div className={styles.user_time}>10 Comments</div>
-          <div className={styles.user_time}>5 Shared</div>
+          <div
+            className={styles.user_time}
+            style={{
+              display: "flex",
+              gap: "10px",
+              alignItems: "center",
+            }}
+          >
+            {profile?.likedposts?.includes(post._id) ? (
+              <FaHeart
+                color="red"
+                style={{
+                  cursor: "pointer",
+                }}
+                size="1.5rem"
+                onClick={() => {
+                  unlikePost(post._id);
+                }}
+              />
+            ) : (
+              <FaHeart
+                style={{
+                  cursor: "pointer",
+                }}
+                size="1.5rem"
+                onClick={() => {
+                  if (!profile) {
+                    toast.error("Please Login to Like a Post");
+                    return;
+                  }
+                  likePost(post._id);
+                }}
+              />
+            )}
+            <div>{post.likes.length === 0 ? 0 : post.likes.length} Likes</div>
+          </div>
+          <CopyToClipboard
+            text={"https://connecthub.vercel.app/posts"}
+            onCopy={() => toast.success("Sharing Link Copied")}
+          >
+            <FaShareAlt size="1.5rem" style={{
+              cursor: "pointer",
+            }}/>
+          </CopyToClipboard>
         </div>
       </div>
     </>

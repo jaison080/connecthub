@@ -18,6 +18,7 @@ async function handler(req, res) {
         email: email,
         uid: uid,
         image: picture,
+        likedposts: [],
       });
       const data = await user.save();
       res.status(200).json({ message: "User added", data });

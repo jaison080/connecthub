@@ -59,8 +59,7 @@ export const UserProvider = ({ children }) => {
           setProfile(response.data.data);
         }
       }
-    } catch (error) {
-    } 
+    } catch (error) {}
   }
 
   //Login Function to be Executed After Google SIgn In
@@ -76,7 +75,7 @@ export const UserProvider = ({ children }) => {
           })
           .then(async (res) => {
             if (res.status === 200) {
-              toast.success("Logged In Successfully")
+              toast.success("Logged In Successfully");
 
               await fetchProfile();
             }
@@ -96,7 +95,7 @@ export const UserProvider = ({ children }) => {
           )
           .then(async (res) => {
             if (res.status === 200) {
-              toast.success("User Registered Successfully")
+              toast.success("User Registered Successfully");
               await fetchProfile();
             }
           });
@@ -226,8 +225,62 @@ export const UserProvider = ({ children }) => {
       );
 
       if (response.status === 200) {
-        toast.success("Friend Removed")
+        toast.success("Friend Removed");
         getAllUsers();
+        fetchProfile();
+
+        return response.data;
+      }
+    }
+    return false;
+  }
+
+  //Like Posts Function
+  async function likePost(id) {
+    if (signedInUser) {
+      const accessToken = await signedInUser.getIdToken();
+      const response = await axios.post(
+        "/api/post/like/add",
+        {
+          postId: id,
+        },
+        {
+          headers: {
+            "x-auth-token": accessToken,
+          },
+        }
+      );
+      if (response.status === 200) {
+        toast.success("Post Liked");
+        getAllUsers();
+        getAllPosts();
+        fetchProfile();
+        return response.data;
+      }
+    }
+    return false;
+  }
+
+  //Unlike Posts Function
+  async function unlikePost(id) {
+    if (signedInUser) {
+      const accessToken = await signedInUser.getIdToken();
+      const response = await axios.post(
+        "/api/post/like/remove",
+        {
+          postId: id,
+        },
+        {
+          headers: {
+            "x-auth-token": accessToken,
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        toast.success("Unliked Post");
+        getAllUsers();
+        getAllPosts();
         fetchProfile();
 
         return response.data;
@@ -254,7 +307,7 @@ export const UserProvider = ({ children }) => {
         }
       );
       if (response.status === 200) {
-        toast.success("Post Created Successfully")
+        toast.success("Post Created Successfully");
         getAllPosts();
         fetchProfile();
         return response.data;
@@ -282,7 +335,7 @@ export const UserProvider = ({ children }) => {
         }
       );
       if (response.status === 200) {
-        toast.success("Post Edited Successfully")
+        toast.success("Post Edited Successfully");
         getAllPosts();
         fetchProfile();
         return response.data;
@@ -310,7 +363,7 @@ export const UserProvider = ({ children }) => {
         }
       );
       if (response.status === 200) {
-        toast.success("Profile Edited Successfully")
+        toast.success("Profile Edited Successfully");
         fetchProfile();
         return response.data;
       }
@@ -331,7 +384,7 @@ export const UserProvider = ({ children }) => {
         },
       });
       if (response.status === 200) {
-        toast.success("Post Deleted Successfully")
+        toast.success("Post Deleted Successfully");
         getAllPosts();
         fetchProfile();
         return response.data;
@@ -360,6 +413,8 @@ export const UserProvider = ({ children }) => {
         updatePost,
         updateProfile,
         deletePost,
+        likePost,
+        unlikePost,
       }}
     >
       {children}
