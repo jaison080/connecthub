@@ -1,4 +1,5 @@
 import { UserContext } from "@/context/UserContext";
+import { storage } from "@/utils/firebaseFront";
 import {
   Button,
   Dialog,
@@ -6,18 +7,35 @@ import {
   DialogTitle,
   TextField,
 } from "@mui/material";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import React, { useContext, useEffect } from "react";
 
 function EditProfileModal({ open, handleClose, profile }) {
   const { updateProfile } = useContext(UserContext);
   const [name, setName] = React.useState(profile?.name);
   const [bio, setBio] = React.useState(profile?.bio);
+  const [file, setFile] = React.useState(null);
   const [image, setImage] = React.useState(profile?.image);
+
+  const handleUploadFile = async (file) => {
+    const storageRef = ref(storage, `profilePhoto/${profile?._id}`);
+
+    uploadBytes(storageRef, file).then(() => {
+      getDownloadURL(storageRef)
+        .then((url) => {
+          setImage(url);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    });
+  };
 
   useEffect(() => {
     setName(profile?.name);
     setBio(profile?.bio);
     setImage(profile?.image);
+    setFile(null);
   }, [profile]);
 
   return (
@@ -47,10 +65,23 @@ function EditProfileModal({ open, handleClose, profile }) {
             value={bio}
             onChange={(e) => setBio(e.target.value)}
           />
-          <Button variant="contained" component="label">
-            Upload Image (Optional)
-            <input type="file" hidden />
-          </Button>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "1rem",
+            }}
+          >
+            <input type="file" onChange={(e) => setFile(e.target.files[0])} />
+            <img
+              src={file ? URL.createObjectURL(file) : image}
+              alt=""
+              style={{ width: "100px", height: "100px", objectFit: "cover" }}
+            />
+            <button onClick={() => handleUploadFile(file)}>
+              Upload Image (Optional)
+            </button>
+          </div>
           <div
             style={{
               display: "flex",
@@ -65,6 +96,7 @@ function EditProfileModal({ open, handleClose, profile }) {
                 setName("");
                 setBio("");
                 setImage(null);
+                setFile(null);
                 handleClose();
               }}
               sx={{ mt: 2 }}
@@ -80,6 +112,7 @@ function EditProfileModal({ open, handleClose, profile }) {
                 setName("");
                 setBio("");
                 setImage(null);
+                setFile(null);
                 handleClose();
               }}
             >
