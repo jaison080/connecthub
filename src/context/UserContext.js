@@ -15,6 +15,7 @@ export const UserContext = React.createContext();
 export const UserProvider = ({ children }) => {
   const provider = new GoogleAuthProvider();
   const [profile, setProfile] = useState();
+  const [loading, setLoading] = useState(true);
   const [signedInUser, setSignedInUser] = useState();
   const [posts, setPosts] = useState([]);
   const [userPosts, setUserPosts] = useState([]);
@@ -50,6 +51,7 @@ export const UserProvider = ({ children }) => {
   async function fetchProfile() {
     try {
       if (signedInUser) {
+        setLoading(true);
         const accessToken = await signedInUser.getIdToken();
         const response = await axios.get("/api/user/profile", {
           headers: {
@@ -58,6 +60,7 @@ export const UserProvider = ({ children }) => {
         });
         if (response.status === 200) {
           setProfile(response.data.data);
+          setLoading(false);
         }
       }
     } catch (error) {}
@@ -118,18 +121,22 @@ export const UserProvider = ({ children }) => {
 
   //Get All Posts
   async function getAllPosts() {
+    setLoading(true);
     const response = await axios.get("/api/post");
     if (response.status === 200) {
       setPosts(response.data);
+      setLoading(false);
     }
   }
 
   //Get All Users
   async function getAllUsers() {
+    setLoading(true);
     const response = await axios.get("/api/user");
     if (response.status === 200) {
       setUsers(response.data);
       setAllUsers(response.data);
+      setLoading(false);
       return response.data;
     }
   }
@@ -137,6 +144,7 @@ export const UserProvider = ({ children }) => {
   //Get Mutual Friends
   async function getMutualFriends(id) {
     if (signedInUser) {
+      setLoading(true);
       const accessToken = await signedInUser.getIdToken();
       const response = await axios.post(
         "/api/user/friends/mutual",
@@ -151,6 +159,7 @@ export const UserProvider = ({ children }) => {
       );
       if (response.status === 200) {
         setMutualFriends(response.data.data);
+        setLoading(false);
         return response.data.data;
       }
     }
@@ -158,6 +167,7 @@ export const UserProvider = ({ children }) => {
 
   //Get Posts By User Id
   async function getPostsbyUserId(id) {
+    setLoading(true);
     let temp = [];
     posts.find((post) => {
       if (post.creator._id === id) {
@@ -165,6 +175,7 @@ export const UserProvider = ({ children }) => {
       }
     });
     setUserPosts(temp);
+    setLoading(false);
     return;
   }
 
@@ -294,6 +305,7 @@ export const UserProvider = ({ children }) => {
   //Create Post
   async function createPost(title, content, image) {
     if (signedInUser) {
+      setLoading(true);
       const accessToken = await signedInUser.getIdToken();
       const response = await axios.post(
         "/api/post/create",
@@ -312,6 +324,7 @@ export const UserProvider = ({ children }) => {
         toast.success("Post Created Successfully");
         getAllPosts();
         fetchProfile();
+        setLoading(false);
         return response.data;
       }
     }
@@ -321,6 +334,7 @@ export const UserProvider = ({ children }) => {
   //Update Post
   async function updatePost(id, title, content, image) {
     if (signedInUser) {
+      setLoading(true);
       const accessToken = await signedInUser.getIdToken();
       const response = await axios.put(
         "/api/post/edit",
@@ -340,6 +354,7 @@ export const UserProvider = ({ children }) => {
         toast.success("Post Edited Successfully");
         getAllPosts();
         fetchProfile();
+        setLoading(false);
         return response.data;
       }
     }
@@ -400,6 +415,7 @@ export const UserProvider = ({ children }) => {
       value={{
         profile,
         posts,
+        loading,
         users,
         allUsers,
         setAllUsers,

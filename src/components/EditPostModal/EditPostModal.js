@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import React, { useContext, useEffect } from "react";
+import styles from "./EditPostModal.module.css";
 
 function EditPostModal({ open, handleClose, post }) {
   const { updatePost } = useContext(UserContext);
@@ -37,17 +38,41 @@ function EditPostModal({ open, handleClose, post }) {
   };
 
   return (
-    <Dialog fullWidth={true} maxWidth="sm" open={open} onClose={handleClose}>
-      <DialogTitle>Update Post</DialogTitle>
-      <DialogContent>
+    <Dialog
+      open={open}
+      PaperProps={{
+        style: {
+          backgroundColor: "#f9f6ed",
+          color: "#a6432d",
+          borderRadius: "1rem",
+          padding: "1rem",
+          fontFamily: "Poppins",
+        },
+      }}
+      BackdropProps={{
+        style: {
+          opacity: 0.5,
+          background:
+            "linear-gradient(90deg, #0C4C82 -13.51%, #0D4F84 -12.59%, #187BA2 5.14%, #1F9BB8 20.99%, #24AFC5 34.24%, #26B6CA 43.28%, #30B9C7 50.27%, #4DBFBE 62.37%, #7ACBAF 78.1%, #B1D89E 94.53%)",
+        },
+      }}
+      onClose={handleClose}
+      fullWidth={true}
+      maxWidth="sm"
+      aria-labelledby="alert-dialog-title"
+      aria-describedby="alert-dialog-description"
+    >
+      <DialogContent sx={{ "&::-webkit-scrollbar": { display: "none" } }}>
         <div
           style={{
             display: "flex",
             flexDirection: "column",
-            gap: "1rem",
-            padding: "2rem",
+            gap: "2rem",
+            padding: "1rem",
+            justifyContent: "center",
           }}
         >
+          <div className={styles.title}>Edit Post</div>
           <TextField
             fullWidth
             label="Title"
@@ -63,10 +88,32 @@ function EditPostModal({ open, handleClose, post }) {
             value={content}
             onChange={(e) => setContent(e.target.value)}
           />
-          <input type="file" onChange={(e) => setFile(e.target.files[0])} />
+          <div
+            style={{
+              fontSize: "1.2rem",
+              fontWeight: "400",
+            }}
+          >
+            Post Image (Optional)
+          </div>
+          <input
+            type="file"
+            accept="image/*"
+            style={{
+              fontFamily: "Poppins",
+            }}
+            onChange={(e) => setFile(e.target.files[0])}
+          />
           <img
             src={file ? URL.createObjectURL(file) : image ? image : ""}
             alt=""
+            style={{
+              width: "150px",
+              height: "150px",
+              alignSelf: "center",
+              objectFit: "cover",
+              borderRadius: "1rem",
+            }}
           />
 
           <div

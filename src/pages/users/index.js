@@ -5,6 +5,7 @@ import axios from "axios";
 import React, { useContext, useEffect } from "react";
 import styles from "../../styles/Users.module.css";
 import Masonry from "react-masonry-css";
+import Loader from "@/components/Loader/Loader";
 
 function Users() {
   const { users, setUsers, loading, allUsers } = useContext(UserContext);
@@ -25,6 +26,9 @@ function Users() {
     setUsers(filteredUsers);
   };
 
+  if(loading) {
+    return <Loader/>;
+  }
   return (
     <>
       <CustomTitle title={"Users"} />

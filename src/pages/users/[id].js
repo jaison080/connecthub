@@ -5,6 +5,8 @@ import React, { useContext, useEffect, useState } from "react";
 import styles from "../../styles/User.module.css";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import CustomTitle from "@/utils/customTitle";
+import Loader from "@/components/Loader/Loader";
+import Masonry from "react-masonry-css";
 
 function User() {
   const router = useRouter();
@@ -24,6 +26,11 @@ function User() {
   } = useContext(UserContext);
   const [user, setUser] = useState();
   const { id } = router.query;
+  const breakpointColumnsObj = {
+    default: 2,
+    900: 1,
+  };
+
   async function fetchUser() {
     const user = users.find((user) => user._id === id);
     setUser(user);
@@ -37,13 +44,13 @@ function User() {
     getPostsbyUserId(id);
   }, [id, posts]);
 
-  // if (loading) {
-  //   return <div>Loading...</div>;
-  // }
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <>
-    <CustomTitle title="User Details"/>
+      <CustomTitle title="User Details" />
       <div className={styles.container}>
         <div className={styles.user_card}>
           <BsFillArrowLeftCircleFill
@@ -131,11 +138,17 @@ function User() {
               Posts
             </div>
             <div className={styles.user_posts_list}>
-              {userPosts
-                .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-                .map((post) => (
-                  <PostCard key={post._id} post={post} />
-                ))}
+              <Masonry
+                breakpointCols={breakpointColumnsObj}
+                className="my-masonry-grid"
+                columnClassName="my-masonry-grid_column"
+              >
+                {userPosts
+                  .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+                  .map((post) => (
+                    <PostCard key={post._id} post={post} />
+                  ))}
+              </Masonry>
             </div>
           </div>
         </div>

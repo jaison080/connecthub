@@ -4,6 +4,7 @@ import CustomTitle from "@/utils/customTitle";
 import React, { useContext } from "react";
 import styles from "../styles/Posts.module.css";
 import Masonry from "react-masonry-css";
+import Loader from "@/components/Loader/Loader";
 
 function Posts() {
   const { posts, loading } = useContext(UserContext);
@@ -12,6 +13,10 @@ function Posts() {
     1200: 2,
     900: 1,
   };
+
+  if (loading) {
+    return <Loader/>;
+  }
   return (
     <>
       <CustomTitle title={"Posts"} />

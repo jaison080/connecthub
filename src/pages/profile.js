@@ -12,12 +12,19 @@ import { IoCreate } from "react-icons/io5";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import { FaUserEdit } from "react-icons/fa";
 import CustomTitle from "@/utils/customTitle";
+import Masonry from "react-masonry-css";
+
+import Loader from "@/components/Loader/Loader";
 
 function Profile() {
   const router = useRouter();
   const { profile, loading } = useContext(UserContext);
   const [open, setOpen] = React.useState(false);
   const [open1, setOpen1] = React.useState(false);
+  const breakpointColumnsObj = {
+    default: 2,
+    900: 1,
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -40,6 +47,10 @@ function Profile() {
       if (!profile) router.push("/");
     }
   }, [profile]);
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <>
@@ -150,16 +161,22 @@ function Profile() {
               Posts
             </div>
             <div className={styles.user_posts_list}>
-              {profile?.posts?.map((post) => {
-                return (
-                  <PostCard
-                    key={post._id}
-                    post={post}
-                    name={profile?.name}
-                    image={profile?.image}
-                  />
-                );
-              })}
+              <Masonry
+                breakpointCols={breakpointColumnsObj}
+                className="my-masonry-grid"
+                columnClassName="my-masonry-grid_column"
+              >
+                {profile?.posts?.map((post) => {
+                  return (
+                    <PostCard
+                      key={post._id}
+                      post={post}
+                      name={profile?.name}
+                      image={profile?.image}
+                    />
+                  );
+                })}
+              </Masonry>
             </div>
           </div>
         </div>
