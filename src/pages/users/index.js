@@ -10,14 +10,14 @@ function Users() {
   const [query, setQuery] = React.useState("");
 
   const searchUsers = async (query) => {
-    console.log(allUsers);
     if (query === "") {
       setUsers(allUsers);
       return;
     }
-    await axios.get(`/api/user/search/${query}`).then((res) => {
-      setUsers(res.data);
-    });
+    const filteredUsers = allUsers.filter((user) =>
+      user.name.toLowerCase().includes(query.toLowerCase())
+    );
+    setUsers(filteredUsers);
   };
 
   return (
