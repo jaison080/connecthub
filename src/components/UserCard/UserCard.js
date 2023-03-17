@@ -14,7 +14,7 @@ function UserCard({ user }) {
     <div
       className={styles.card}
       style={{ cursor: "pointer" }}
-      data-aos="zoom-in"
+     
     >
       <div className={styles.first_row}>
         <div

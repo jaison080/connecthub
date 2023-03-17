@@ -1,42 +1,25 @@
 import { UserCard } from "@/components";
 import { UserContext } from "@/context/UserContext";
 import CustomTitle from "@/utils/customTitle";
-import { debounce } from "@mui/material";
 import axios from "axios";
 import React, { useContext, useEffect } from "react";
 import styles from "../../styles/Users.module.css";
 
 function Users() {
   const { users, setUsers, loading, allUsers } = useContext(UserContext);
-  const [initial, setInitial] = React.useState([]);
   const [query, setQuery] = React.useState("");
-  const searchFun = (queryParam, setUsers) => {
-    axios
-      .get(`/api/user/search/${queryParam}`)
-      .then((res) => {
-        console.log(res);
-        setUsers(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-  useEffect(() => {
-    setInitial(allUsers);
-    setUsers(allUsers);
-    setQuery("");
-  }, []);
 
-  const debouncedSearch = debounce(searchFun, 500);
-
-  const onSearch = (v) => {
-    const search = debouncedSearch;
-    if (!v) {
-      setUsers(initial);
-    } else {
-      search(v, setUsers);
+  const searchUsers = async (query) => {
+    console.log(allUsers);
+    if (query === "") {
+      setUsers(allUsers);
+      return;
     }
+    await axios.get(`/api/user/search/${query}`).then((res) => {
+      setUsers(res.data);
+    });
   };
+
   return (
     <>
       <CustomTitle title={"Users"} />
@@ -48,7 +31,7 @@ function Users() {
           value={query}
           onChange={(e) => {
             setQuery(e.target.value);
-            onSearch(e.target.value);
+            searchUsers(e.target.value);
           }}
         />
         <div className={styles.users_container}>
