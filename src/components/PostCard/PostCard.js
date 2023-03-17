@@ -3,6 +3,7 @@ import { Button } from "@mui/material";
 import React, { useContext } from "react";
 import { toast } from "react-hot-toast";
 import { FaHeart, FaShareAlt } from "react-icons/fa";
+import {FiHeart } from "react-icons/fi";
 import EditPostModal from "../EditPostModal/EditPostModal";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
@@ -89,7 +90,7 @@ function PostCard({ post, name, image }) {
                 }}
               />
             ) : (
-              <FaHeart
+              <FiHeart
                 style={{
                   cursor: "pointer",
                 }}
@@ -109,9 +110,13 @@ function PostCard({ post, name, image }) {
             text={"https://connecthub.vercel.app/posts"}
             onCopy={() => toast.success("Sharing Link Copied")}
           >
-            <FaShareAlt size="1.5rem" style={{
-              cursor: "pointer",
-            }}/>
+            <FaShareAlt
+              size="1.5rem"
+              style={{
+                cursor: "pointer",
+              }}
+              color="rgba(104, 97, 97, 0.63)"
+            />
           </CopyToClipboard>
         </div>
       </div>

@@ -35,7 +35,9 @@ function UserCard({ user }) {
                 toast.error("Please login to add friends");
                 return;
               }
-              isFriend(user?._id) ? removeFriend(user?._id) : addFriend(user?._id);
+              isFriend(user?._id)
+                ? removeFriend(user?._id)
+                : addFriend(user?._id);
             }}
           >
             {isFriend(user?._id) ? "Unfriend" : "Friend"}
@@ -51,7 +53,9 @@ function UserCard({ user }) {
         }}
       >
         <div className={styles.user_name}>{user?.name}</div>
-        <div className={styles.user_username}>@{user?.email?.split("@")[0]}</div>
+        <div className={styles.user_username}>
+          @{user?.email?.split("@")[0]}
+        </div>
       </div>
       <div
         className={styles.bio}
@@ -74,7 +78,15 @@ function UserCard({ user }) {
         <div className={styles.footer_text}>
           <b>{user?.friends?.length}</b> Friends
         </div>
-        <div className={styles.footer_text}>Since April 30, 2017</div>
+        <div className={styles.footer_text}>
+          Since{" "}
+          {new Date(user?.createdAt).toLocaleDateString().substring(0, 2) +
+            ", " +
+            new Date(user?.createdAt).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+            })}
+        </div>
       </div>
     </div>
   );
