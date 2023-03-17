@@ -3,7 +3,7 @@ import { Button } from "@mui/material";
 import React, { useContext } from "react";
 import { toast } from "react-hot-toast";
 import { FaHeart, FaShareAlt } from "react-icons/fa";
-import {FiHeart } from "react-icons/fi";
+import { FiHeart } from "react-icons/fi";
 import EditPostModal from "../EditPostModal/EditPostModal";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
@@ -36,7 +36,14 @@ function PostCard({ post, name, image }) {
             <div className={styles.user_name}>
               {post.creator?.name ? post.creator.name : name}
             </div>
-            <div className={styles.user_time}>4 Days Ago</div>
+            <div className={styles.user_time}>
+              {new Date(post?.createdAt).toLocaleDateString().substring(0, 2) +
+                ", " +
+                new Date(post?.createdAt).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                })}
+            </div>
           </div>
           {post.creator === profile?._id ||
           post.creator?._id === profile?._id ? (
