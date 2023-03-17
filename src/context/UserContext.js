@@ -19,6 +19,7 @@ export const UserProvider = ({ children }) => {
   const [posts, setPosts] = useState([]);
   const [userPosts, setUserPosts] = useState([]);
   const [users, setUsers] = useState([]);
+  const [allUsers, setAllUsers] = useState([]);
   const [mutualFriends, setMutualFriends] = useState([]);
   const auth = getAuth(app);
 
@@ -128,6 +129,7 @@ export const UserProvider = ({ children }) => {
     const response = await axios.get("/api/user");
     if (response.status === 200) {
       setUsers(response.data);
+      setAllUsers(response.data);
       return response.data;
     }
   }
@@ -399,6 +401,9 @@ export const UserProvider = ({ children }) => {
         profile,
         posts,
         users,
+        allUsers,
+        setAllUsers,
+        setUsers,
         userPosts,
         signedInUser,
         mutualFriends,
