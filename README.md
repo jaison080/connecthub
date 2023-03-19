@@ -6,13 +6,22 @@ Link : https://connecthub.vercel.app/
 
 ## Video Demo
 
+<a href="https://www.youtube.com/watch?v=6lkqJYG_Heg" target="_blank"><img src="https://img.youtube.com/vi/6lkqJYG_Heg/0.jpg"
+alt="ConnectHub"  /></a>
+
+
 ## 📝 Description
 
 Create a mini social network. The application should have features like:-
 
  <ul>
  <li>Users should be able to sign up/sign in, and create a profile for themselves.</li>
+ <li>Create a post.</li>
+    <li>Like/unlike a post.</li>
+    <li>Edit/delete a post.</li>
+    <li>View a list of all posts.</li>
 <li>Search for other users.</li>
+
 <li>View other users' profiles & make them friends/unfriend them.</li>
 <li>View a list of mutual friends between users. A mutual friend is a user who is a friend of two other users who may or may not know each other. </li>
  </ul>
